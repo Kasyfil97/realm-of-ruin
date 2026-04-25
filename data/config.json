@@ -1,0 +1,40 @@
+{
+  "starting_resources": {
+    "gold": { "base": 500, "variance": 0.15 },
+    "food": { "base": 600, "variance": 0.15 },
+    "military": { "base": 40, "variance": 0.15 },
+    "loyalty": { "base": 60, "variance": 0.15 },
+    "population": { "base": 1000, "variance": 0.15 },
+    "reputation": { "base": 30, "variance": 0.15 }
+  },
+  "warning_threshold": 0.20,
+  "max_day": 100,
+  "event_repeat_cooldown": 5,
+  "act_transitions": {
+    "act1_to_act2": { "window_start": 25, "window_end": 35 },
+    "act2_to_act3": { "window_start": 55, "window_end": 70 }
+  },
+  "victory_paths": {
+    "military_dominance": {
+      "military_min": 70,
+      "rival_lords_defeated_min": 2,
+      "battles_won_min": 3
+    },
+    "political_alliance": {
+      "rival_lords_allied_min": 2,
+      "council_support_min": 2,
+      "reputation_min": 50
+    },
+    "popular_support": {
+      "reputation_min": 70,
+      "population_min": 1500,
+      "loyalty_min": 70
+    }
+  },
+  "combat_commitment_tiers": {
+    "none": 0,
+    "light": 0.1,
+    "moderate": 0.25,
+    "heavy": 0.5
+  }
+}

@@ -1,0 +1,113 @@
+[
+  {
+    "id": "lord_voss",
+    "name": "Lord Voss",
+    "title": "The Warlord",
+    "faction": "military",
+    "personality": "aggressive",
+    "military_strength": 75,
+    "diplomatic_stance": "hostile",
+    "description": "A scarred veteran who seized his lands by force. Respects only strength and sees diplomacy as weakness.",
+    "resolution_paths": [
+      {
+        "id": "military_defeat",
+        "method": "Defeat in open battle",
+        "requirements": "Win a combat event against Voss with Military >= 60",
+        "flags_set": ["voss_defeated_military"]
+      },
+      {
+        "id": "intimidation_alliance",
+        "method": "Alliance through show of force",
+        "requirements": "Military >= 60 and Reputation >= 40",
+        "flags_set": ["voss_allied", "allied_with_lord_voss"]
+      },
+      {
+        "id": "assassination",
+        "method": "Hire assassins to eliminate him",
+        "requirements": "Has espionage advisor and Gold >= 200",
+        "flags_set": ["voss_assassinated"]
+      }
+    ],
+    "event_triggers": {
+      "rumor_flag": "voss_rumored",
+      "encounter_flag": "voss_encountered",
+      "introduction_act": 1,
+      "encounter_act": 2,
+      "confrontation_act": 3
+    }
+  },
+  {
+    "id": "lady_morath",
+    "name": "Lady Morath",
+    "title": "The Schemer",
+    "faction": "espionage",
+    "personality": "manipulative",
+    "military_strength": 45,
+    "diplomatic_stance": "deceptive",
+    "description": "Rules through whispers and poison. Her spy network stretches across every court. Nothing happens without her knowing.",
+    "resolution_paths": [
+      {
+        "id": "expose_network",
+        "method": "Expose and dismantle her spy network",
+        "requirements": "Has espionage advisor and flag 'morath_spy_discovered'",
+        "flags_set": ["morath_defeated_espionage"]
+      },
+      {
+        "id": "counter_espionage_alliance",
+        "method": "Alliance through mutual espionage pact",
+        "requirements": "Has espionage advisor and Reputation >= 30",
+        "flags_set": ["morath_allied", "allied_with_lady_morath"]
+      },
+      {
+        "id": "marriage_pact",
+        "method": "Seal alliance through marriage",
+        "requirements": "Loyalty >= 40 and Reputation >= 50",
+        "flags_set": ["morath_married", "allied_with_lady_morath"]
+      }
+    ],
+    "event_triggers": {
+      "rumor_flag": "morath_rumored",
+      "encounter_flag": "morath_encountered",
+      "introduction_act": 1,
+      "encounter_act": 2,
+      "confrontation_act": 3
+    }
+  },
+  {
+    "id": "duke_ashford",
+    "name": "Duke Ashford",
+    "title": "The Diplomat",
+    "faction": "political",
+    "personality": "calculating",
+    "military_strength": 25,
+    "diplomatic_stance": "neutral",
+    "description": "Wields influence like a blade. His wealth and political connections make him dangerous without ever drawing a sword.",
+    "resolution_paths": [
+      {
+        "id": "political_alliance",
+        "method": "Form a political alliance",
+        "requirements": "Reputation >= 50 and has diplomacy advisor",
+        "flags_set": ["ashford_allied", "allied_with_duke_ashford"]
+      },
+      {
+        "id": "trade_agreement",
+        "method": "Bind him through trade dependency",
+        "requirements": "Gold >= 300 and has trade advisor",
+        "flags_set": ["ashford_allied", "allied_with_duke_ashford"]
+      },
+      {
+        "id": "undermine_support",
+        "method": "Undermine his council support",
+        "requirements": "Has espionage advisor and Reputation >= 40",
+        "flags_set": ["ashford_defeated_political"]
+      }
+    ],
+    "event_triggers": {
+      "rumor_flag": "ashford_rumored",
+      "encounter_flag": "ashford_encountered",
+      "introduction_act": 1,
+      "encounter_act": 2,
+      "confrontation_act": 3
+    }
+  }
+]

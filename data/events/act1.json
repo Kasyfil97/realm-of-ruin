@@ -1,0 +1,818 @@
+[
+  {
+    "id": "act1_bandit_raid",
+    "title": "Wolves at the Gate",
+    "acts": [1],
+    "weight": 10,
+    "type": "combat",
+    "preconditions": {
+      "min_day": 2,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["bandits", "defense", "voss_foreshadow"],
+    "options": [
+      {
+        "id": "bandit_fight",
+        "label": "Ride out and crush them",
+        "narrative_hint": "A decisive military action; soldiers may die, but the message is clear",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [-20, -10],
+          "military": [-5, -2],
+          "loyalty": [5, 10],
+          "population": [-15, -5],
+          "reputation": [3, 7]
+        },
+        "flags_set": ["bandits_routed"],
+        "flags_clear": [],
+        "chain": "chain_bandits_return"
+      },
+      {
+        "id": "bandit_pay_off",
+        "label": "Pay them to leave",
+        "narrative_hint": "Gold buys peace today but invites contempt tomorrow; word spreads you can be bought, though at least the fields remain unburned",
+        "impacts": {
+          "gold": [-80, -50],
+          "food": [10, 25],
+          "military": [0, 0],
+          "loyalty": [-8, -3],
+          "population": [0, 0],
+          "reputation": [-5, -2]
+        },
+        "flags_set": ["bandits_bribed"],
+        "flags_clear": [],
+        "chain": "chain_bandits_return"
+      },
+      {
+        "id": "bandit_negotiate",
+        "label": "Offer them land to settle as militia",
+        "narrative_hint": "A gamble — former outlaws now guard your borders, but your people distrust them",
+        "impacts": {
+          "gold": [-20, -10],
+          "food": [-30, -15],
+          "military": [4, 8],
+          "loyalty": [-10, -5],
+          "population": [15, 30],
+          "reputation": [-3, -1]
+        },
+        "flags_set": ["bandits_settled"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act1_harvest_decision",
+    "title": "The Withering Fields",
+    "acts": [1],
+    "weight": 9,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 3,
+      "max_day": 20,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["harvest", "seasons", "peasant_life"],
+    "options": [
+      {
+        "id": "harvest_early",
+        "label": "Harvest early before the blight spreads",
+        "narrative_hint": "Salvage what you can now — less yield, but guaranteed supply; farmers resent the lost potential",
+        "impacts": {
+          "gold": [-15, -5],
+          "food": [40, 70],
+          "military": [0, 0],
+          "loyalty": [-5, -2],
+          "population": [0, 0],
+          "reputation": [0, 0]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "harvest_wait",
+        "label": "Wait and hope the weather turns",
+        "narrative_hint": "A gamble on nature's mercy — full harvest or devastating loss; peasants admire your faith in the land",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [-40, 100],
+          "military": [0, 0],
+          "loyalty": [2, 6],
+          "population": [0, 0],
+          "reputation": [-2, 2]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "harvest_conscript",
+        "label": "Pull soldiers to help the farmers",
+        "narrative_hint": "More hands save more grain, but your borders stand unguarded; Commander Aldus objects loudly",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [60, 90],
+          "military": [-6, -3],
+          "loyalty": [3, 7],
+          "population": [0, 0],
+          "reputation": [-3, -1]
+        },
+        "flags_set": ["military_diverted"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act1_noble_dispute",
+    "title": "Blood and Birthright",
+    "acts": [1],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 5,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["nobles", "inheritance", "politics", "ashford_foreshadow"],
+    "options": [
+      {
+        "id": "noble_elder",
+        "label": "Rule in favor of the elder sibling",
+        "narrative_hint": "Tradition upheld — the old families approve, but the younger sibling has merchant connections you may need",
+        "impacts": {
+          "gold": [-10, 0],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [5, 10],
+          "population": [0, 0],
+          "reputation": [2, 5]
+        },
+        "flags_set": ["noble_traditionalist", "ashford_rumored"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "noble_younger",
+        "label": "Back the younger sibling's claim",
+        "narrative_hint": "The younger one has trade savvy and promises gold, but old nobles see you as a tradition-breaker",
+        "impacts": {
+          "gold": [20, 40],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-8, -4],
+          "population": [0, 0],
+          "reputation": [-4, -1]
+        },
+        "flags_set": ["noble_reformer"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "noble_split",
+        "label": "Split the estate between them",
+        "narrative_hint": "A compromise no one loves — both sides feel cheated, but neither becomes an enemy",
+        "impacts": {
+          "gold": [5, 15],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-3, -1],
+          "population": [0, 0],
+          "reputation": [1, 3]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act1_merchant_caravan",
+    "title": "The Shrewd Stranger",
+    "acts": [1],
+    "weight": 9,
+    "type": "advisor",
+    "preconditions": {
+      "min_day": 4,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": ["has_trade_advisor"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["trade", "advisor_recruitment", "merchant_elara"],
+    "options": [
+      {
+        "id": "merchant_hire",
+        "label": "Hire Elara as your trade advisor",
+        "narrative_hint": "Her expertise is undeniable, but her loyalty is to coin — she demands a steep retainer and Commander Aldus distrusts her motives",
+        "impacts": {
+          "gold": [-60, -40],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-4, -2],
+          "population": [0, 0],
+          "reputation": [3, 6]
+        },
+        "flags_set": ["has_trade_advisor"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "merchant_trade_only",
+        "label": "Trade with her caravan but don't hire her",
+        "narrative_hint": "A one-time bargain — good prices now, but you lose access to her network and she may offer her services to a rival lord",
+        "impacts": {
+          "gold": [15, 30],
+          "food": [20, 40],
+          "military": [0, 0],
+          "loyalty": [0, 0],
+          "population": [0, 0],
+          "reputation": [-2, 0]
+        },
+        "flags_set": ["elara_rejected"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "merchant_refuse",
+        "label": "Turn her away — outsiders can't be trusted",
+        "narrative_hint": "Your people feel safer, but you've slammed the door on commerce; Aldus approves, your coffers do not",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [3, 6],
+          "population": [0, 0],
+          "reputation": [-4, -2]
+        },
+        "flags_set": ["elara_rejected"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act1_construction",
+    "title": "Stone and Sweat",
+    "acts": [1],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 6,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {
+        "gold": 80
+      }
+    },
+    "narrative_hooks": ["construction", "infrastructure", "labor"],
+    "options": [
+      {
+        "id": "build_walls",
+        "label": "Reinforce the keep walls",
+        "narrative_hint": "Stone walls buy time against siege, but farmers pulled from fields mean less food and rising resentment",
+        "impacts": {
+          "gold": [-100, -70],
+          "food": [-30, -15],
+          "military": [3, 6],
+          "loyalty": [-5, -2],
+          "population": [0, 0],
+          "reputation": [2, 5]
+        },
+        "flags_set": ["walls_reinforced"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "build_granary",
+        "label": "Expand the granary",
+        "narrative_hint": "More storage means surviving winter, but the gold spent leaves nothing for soldiers; your borders feel thinner",
+        "impacts": {
+          "gold": [-80, -50],
+          "food": [50, 80],
+          "military": [0, 0],
+          "loyalty": [2, 5],
+          "population": [0, 0],
+          "reputation": [-2, 0]
+        },
+        "flags_set": ["granary_expanded"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "build_market",
+        "label": "Build a market square",
+        "narrative_hint": "Trade flourishes and newcomers arrive, but construction disrupts the town and draws attention from envious neighbors",
+        "impacts": {
+          "gold": [-90, -60],
+          "food": [-10, 0],
+          "military": [0, 0],
+          "loyalty": [1, 4],
+          "population": [20, 50],
+          "reputation": [3, 7]
+        },
+        "flags_set": ["market_built"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act1_peasant_petition",
+    "title": "The Hungry Crowd",
+    "acts": [1],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 3,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["peasants", "famine", "justice", "morath_foreshadow"],
+    "options": [
+      {
+        "id": "petition_grant",
+        "label": "Open the reserves and feed them",
+        "narrative_hint": "Generosity wins hearts but empties stores; the soldiers eye their shrinking rations with growing unease",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [-80, -50],
+          "military": [0, 0],
+          "loyalty": [8, 15],
+          "population": [10, 25],
+          "reputation": [3, 6]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "petition_ration",
+        "label": "Institute strict rationing for all",
+        "narrative_hint": "Fair but painful — everyone suffers equally, nobles and peasants alike resent the austerity",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [-20, -10],
+          "military": [-2, -1],
+          "loyalty": [-4, -1],
+          "population": [0, 0],
+          "reputation": [1, 3]
+        },
+        "flags_set": ["rationing_imposed"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "petition_refuse",
+        "label": "Tell them to fend for themselves",
+        "narrative_hint": "Resources conserved, but whispers spread — a strange woman in the crowd watches you with cold, knowing eyes",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [15, 30],
+          "military": [0, 0],
+          "loyalty": [-12, -6],
+          "population": [-30, -10],
+          "reputation": [-5, -2]
+        },
+        "flags_set": ["morath_rumored"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act1_storm",
+    "title": "The Three-Day Gale",
+    "acts": [1],
+    "weight": 7,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 8,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["weather", "crisis", "disaster_response"],
+    "options": [
+      {
+        "id": "storm_shelter",
+        "label": "Open the keep as shelter for all",
+        "narrative_hint": "Your halls overflow with muddy, frightened peasants — disease risk rises but you save lives; your soldiers lose training grounds for days",
+        "impacts": {
+          "gold": [-25, -10],
+          "food": [-40, -20],
+          "military": [-3, -1],
+          "loyalty": [8, 14],
+          "population": [5, 15],
+          "reputation": [2, 5]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "storm_salvage",
+        "label": "Send soldiers to salvage what they can from the fields",
+        "narrative_hint": "Soldiers drag grain from the mud while peasants huddle in their homes — food saved but men injured and exhausted",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [20, 45],
+          "military": [-5, -2],
+          "loyalty": [1, 4],
+          "population": [0, 0],
+          "reputation": [0, 2]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "storm_lockdown",
+        "label": "Bar the gates and protect the keep's stores",
+        "narrative_hint": "The keep weathers the storm; the village does not — you hear the crying through the walls",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 10],
+          "military": [0, 0],
+          "loyalty": [-10, -5],
+          "population": [-25, -10],
+          "reputation": [-5, -2]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act1_tax_collection",
+    "title": "The Collector's Dilemma",
+    "acts": [1],
+    "weight": 9,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 7,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["taxes", "economy", "authority", "voss_foreshadow"],
+    "options": [
+      {
+        "id": "tax_heavy",
+        "label": "Enforce the full tax — no exceptions",
+        "narrative_hint": "Coffers swell but families go hungry; a veteran farmer spits at your collector's feet and mentions a warlord to the north who takes less",
+        "impacts": {
+          "gold": [60, 90],
+          "food": [-15, -5],
+          "military": [0, 0],
+          "loyalty": [-10, -5],
+          "population": [-15, -5],
+          "reputation": [-3, -1]
+        },
+        "flags_set": ["voss_rumored"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "tax_moderate",
+        "label": "Reduce the tax for struggling families",
+        "narrative_hint": "A measured approach — less gold but goodwill; the wealthy grumble that they carry the burden alone and some quietly withhold grain",
+        "impacts": {
+          "gold": [30, 50],
+          "food": [-10, -5],
+          "military": [0, 0],
+          "loyalty": [3, 7],
+          "population": [0, 5],
+          "reputation": [1, 3]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "tax_forgive",
+        "label": "Suspend taxes entirely this season",
+        "narrative_hint": "The people celebrate but your treasury groans; Commander Aldus warns that soldiers need pay, not promises",
+        "impacts": {
+          "gold": [-10, 0],
+          "food": [0, 0],
+          "military": [-2, -1],
+          "loyalty": [8, 14],
+          "population": [10, 20],
+          "reputation": [2, 5]
+        },
+        "flags_set": ["taxes_suspended"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act1_festival",
+    "title": "The Founder's Feast",
+    "acts": [1],
+    "weight": 7,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 10,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {
+        "food": 100
+      }
+    },
+    "narrative_hooks": ["morale", "festival", "tradition", "community"],
+    "options": [
+      {
+        "id": "festival_lavish",
+        "label": "Throw a grand feast — spare no expense",
+        "narrative_hint": "Music, meat, and mead flow freely; your people forget their troubles for one glorious night — and your stores for a hard week after",
+        "impacts": {
+          "gold": [-50, -30],
+          "food": [-80, -50],
+          "military": [1, 3],
+          "loyalty": [10, 18],
+          "population": [5, 15],
+          "reputation": [4, 8]
+        },
+        "flags_set": ["festival_held"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "festival_modest",
+        "label": "Hold a modest gathering — speeches and song",
+        "narrative_hint": "Dignity without excess; some call it inspiring, others call it cheap — but the pantry survives intact",
+        "impacts": {
+          "gold": [-15, -5],
+          "food": [-25, -10],
+          "military": [0, 0],
+          "loyalty": [4, 8],
+          "population": [0, 0],
+          "reputation": [1, 3]
+        },
+        "flags_set": ["festival_held"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "festival_cancel",
+        "label": "Cancel the festival — there's no time for frivolity",
+        "narrative_hint": "Practical but joyless; the old guard nods in approval while children stare at empty festival grounds",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [0, 1],
+          "loyalty": [-8, -4],
+          "population": [0, 0],
+          "reputation": [-3, -1]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act1_food_spoilage",
+    "title": "Rot in the Cellar",
+    "acts": [1],
+    "weight": 7,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 5,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["food_crisis", "corruption", "investigation"],
+    "options": [
+      {
+        "id": "spoilage_investigate",
+        "label": "Launch a full investigation — find who's responsible",
+        "narrative_hint": "Truth costs time and gold; fingers point at the quartermaster, who has friends among the guards",
+        "impacts": {
+          "gold": [-25, -10],
+          "food": [-60, -30],
+          "military": [-3, -1],
+          "loyalty": [2, 6],
+          "population": [0, 0],
+          "reputation": [2, 5]
+        },
+        "flags_set": ["quartermaster_investigated"],
+        "flags_clear": [],
+        "chain": "chain_spy_report"
+      },
+      {
+        "id": "spoilage_distribute",
+        "label": "Distribute what remains before it all rots",
+        "narrative_hint": "Quick action saves bellies but rewards negligence; the real cause goes unaddressed",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [-40, -20],
+          "military": [0, 0],
+          "loyalty": [3, 6],
+          "population": [0, 0],
+          "reputation": [-2, 0]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "spoilage_punish",
+        "label": "Publicly punish the stores keeper as an example",
+        "narrative_hint": "Swift justice or scapegoating — the crowd watches in uneasy silence; order is maintained through fear",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [-50, -25],
+          "military": [0, 0],
+          "loyalty": [-6, -2],
+          "population": [-5, 0],
+          "reputation": [1, 4]
+        },
+        "flags_set": ["harsh_justice"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act1_guard_recruitment",
+    "title": "Swords for Hire",
+    "acts": [1],
+    "weight": 9,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 4,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["military", "recruitment", "mercenaries"],
+    "options": [
+      {
+        "id": "recruit_mercenaries",
+        "label": "Hire the wandering sellswords",
+        "narrative_hint": "Skilled blades but questionable loyalty — they fight for coin, not for you; your existing soldiers eye the newcomers with suspicion",
+        "impacts": {
+          "gold": [-70, -45],
+          "food": [-20, -10],
+          "military": [8, 14],
+          "loyalty": [-6, -3],
+          "population": [5, 15],
+          "reputation": [-3, -1]
+        },
+        "flags_set": ["mercenaries_hired"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "recruit_conscript",
+        "label": "Conscript able-bodied villagers",
+        "narrative_hint": "Free soldiers but unwilling ones — fields go unworked and families lose providers; Commander Aldus can train them, given time",
+        "impacts": {
+          "gold": [-10, -5],
+          "food": [-25, -10],
+          "military": [5, 10],
+          "loyalty": [-8, -4],
+          "population": [-20, -10],
+          "reputation": [-4, -1]
+        },
+        "flags_set": ["conscription_enforced"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "recruit_volunteers",
+        "label": "Call for volunteers with promises of land",
+        "narrative_hint": "Willing recruits but fewer than you need — and the land you promised must come from somewhere",
+        "impacts": {
+          "gold": [-15, -5],
+          "food": [-10, -5],
+          "military": [3, 6],
+          "loyalty": [2, 5],
+          "population": [-10, -5],
+          "reputation": [1, 3]
+        },
+        "flags_set": ["land_promised"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "recruit_decline",
+        "label": "Turn them all away — we can't afford more mouths",
+        "narrative_hint": "Prudent but perilous; your borders remain thin and Commander Aldus makes his displeasure known, though your stores go undiminished",
+        "impacts": {
+          "gold": [5, 10],
+          "food": [5, 10],
+          "military": [0, 0],
+          "loyalty": [-2, -1],
+          "population": [0, 0],
+          "reputation": [-2, -1]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act1_neighbor_aid",
+    "title": "Smoke on the Horizon",
+    "acts": [1],
+    "weight": 9,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 10,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["neighbors", "alliance", "refugees", "voss_foreshadow"],
+    "options": [
+      {
+        "id": "neighbor_send_troops",
+        "label": "Send soldiers to defend the village",
+        "narrative_hint": "Heroic and costly — your soldiers march to fight someone else's war, and the attackers bear a warlord's banner you don't recognize",
+        "impacts": {
+          "gold": [-20, -10],
+          "food": [-25, -15],
+          "military": [-8, -4],
+          "loyalty": [2, 5],
+          "population": [0, 0],
+          "reputation": [6, 12]
+        },
+        "flags_set": ["neighbor_defended", "voss_rumored"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "neighbor_take_refugees",
+        "label": "Accept the fleeing refugees but stay out of the fight",
+        "narrative_hint": "More mouths to feed, more hands to work — but your own people worry about strangers eating their bread",
+        "impacts": {
+          "gold": [-10, -5],
+          "food": [-40, -20],
+          "military": [1, 3],
+          "loyalty": [-4, -1],
+          "population": [30, 60],
+          "reputation": [3, 6]
+        },
+        "flags_set": ["refugees_accepted"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "neighbor_close_borders",
+        "label": "Close the borders — their problem is not yours",
+        "narrative_hint": "Cold pragmatism; your people are safe but the smoke keeps rising and the survivors will remember who turned them away",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [2, 5],
+          "population": [0, 0],
+          "reputation": [-8, -4]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "neighbor_send_supplies",
+        "label": "Send food and gold but no soldiers",
+        "narrative_hint": "Charity without risk to your own — they'll eat tonight but may not survive tomorrow; a half-measure that satisfies no one fully",
+        "impacts": {
+          "gold": [-40, -25],
+          "food": [-50, -30],
+          "military": [0, 0],
+          "loyalty": [1, 3],
+          "population": [5, 15],
+          "reputation": [4, 8]
+        },
+        "flags_set": ["ashford_rumored"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  }
+]

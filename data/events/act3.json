@@ -1,0 +1,874 @@
+[
+  {
+    "id": "act3_council_corruption",
+    "title": "The Rot in the Council",
+    "acts": [3],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 66,
+      "max_day": 85,
+      "required_flags": [],
+      "blocked_by_flags": ["council_purged", "council_bribed"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["council_corruption", "throne_room_politics", "noble_conspiracies"],
+    "options": [
+      {
+        "id": "purge_council",
+        "label": "Purge the corrupt members publicly",
+        "narrative_hint": "A dramatic throne room confrontation — guards drag councilors away in chains. The remaining members watch in silence. Order is restored, but fear now sits where trust once did.",
+        "impacts": {
+          "gold": [-40, -20],
+          "food": [0, 0],
+          "military": [5, 10],
+          "loyalty": [-15, -5],
+          "population": [0, 0],
+          "reputation": [10, 20]
+        },
+        "flags_set": ["council_purged", "council_support_gained"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "bribe_council",
+        "label": "Buy their loyalty with gold and titles",
+        "narrative_hint": "Backroom deals and whispered promises. The corruption doesn't end — it merely shifts to serve the throne. Effective, but at what cost to the realm's soul?",
+        "impacts": {
+          "gold": [-80, -50],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [5, 15],
+          "population": [0, 0],
+          "reputation": [-15, -5]
+        },
+        "flags_set": ["council_bribed", "council_support_gained"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "expose_to_people",
+        "label": "Expose the corruption to the populace",
+        "narrative_hint": "Scrolls nailed to every door, criers in every square. The people learn what their betters have been doing. The council's power crumbles — but so does institutional stability.",
+        "impacts": {
+          "gold": [-10, 0],
+          "food": [0, 0],
+          "military": [-5, 0],
+          "loyalty": [10, 20],
+          "population": [50, 100],
+          "reputation": [15, 25]
+        },
+        "flags_set": ["council_exposed", "populist_momentum"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act3_voss_confrontation",
+    "title": "The Warlord's Challenge",
+    "acts": [3],
+    "weight": 10,
+    "type": "combat",
+    "preconditions": {
+      "min_day": 70,
+      "max_day": 95,
+      "required_flags": ["voss_encountered"],
+      "blocked_by_flags": ["voss_defeated_military", "voss_allied", "voss_assassinated"],
+      "resource_min": {
+        "military": 30
+      }
+    },
+    "narrative_hooks": ["rival_lord_confrontation", "final_confrontation", "military_campaign"],
+    "options": [
+      {
+        "id": "commit_heavily",
+        "label": "Commit heavily — crush Voss on the field",
+        "narrative_hint": "Every soldier marches. Banners fill the horizon. This is the decisive blow — total commitment to total victory. But the realm stands undefended while the army is away.",
+        "impacts": {
+          "gold": [-60, -40],
+          "food": [-80, -50],
+          "military": [-20, -10],
+          "loyalty": [5, 15],
+          "population": [-100, -50],
+          "reputation": [15, 25]
+        },
+        "flags_set": ["voss_defeated_military", "battle_won_voss"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_moderately",
+        "label": "Commit moderately — a calculated engagement",
+        "narrative_hint": "A measured force meets Voss on chosen ground. Not enough to guarantee victory, but enough to bloody him. The outcome hangs on tactics, not brute strength.",
+        "impacts": {
+          "gold": [-40, -20],
+          "food": [-50, -30],
+          "military": [-10, -5],
+          "loyalty": [0, 10],
+          "population": [-60, -30],
+          "reputation": [5, 15]
+        },
+        "flags_set": ["voss_bloodied", "battle_won_voss"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_lightly",
+        "label": "Commit lightly — skirmish and harass",
+        "narrative_hint": "Hit-and-run tactics. Burn his supply lines, ambush his scouts. It won't break him, but it might slow him down long enough to find another way.",
+        "impacts": {
+          "gold": [-20, -10],
+          "food": [-20, -10],
+          "military": [-5, 0],
+          "loyalty": [-5, 0],
+          "population": [-30, -10],
+          "reputation": [-5, 5]
+        },
+        "flags_set": ["voss_harassed"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "retreat",
+        "label": "Retreat — concede the field to Voss",
+        "narrative_hint": "The banners come down. The army falls back behind the walls. Voss takes the field unchallenged. He'll be emboldened, but your forces live to fight another day — if there is another day.",
+        "impacts": {
+          "gold": [0, 10],
+          "food": [0, 10],
+          "military": [0, 5],
+          "loyalty": [-20, -10],
+          "population": [0, 0],
+          "reputation": [-25, -15]
+        },
+        "flags_set": ["voss_emboldened", "retreated_from_voss"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act3_morath_endgame",
+    "title": "The Schemer's Web",
+    "acts": [3],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 68,
+      "max_day": 92,
+      "required_flags": ["morath_encountered"],
+      "blocked_by_flags": ["morath_defeated_espionage", "morath_allied", "morath_married"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["rival_lord_confrontation", "noble_conspiracies", "assassination_attempts"],
+    "options": [
+      {
+        "id": "expose_network",
+        "label": "Expose her spy network to the realm",
+        "narrative_hint": "Names, locations, dead drops — all dragged into the light. Morath's invisible empire crumbles as agents are rounded up. But some of those agents had been useful to you, too.",
+        "impacts": {
+          "gold": [-30, -15],
+          "food": [0, 0],
+          "military": [5, 10],
+          "loyalty": [10, 20],
+          "population": [0, 0],
+          "reputation": [10, 20]
+        },
+        "flags_set": ["morath_defeated_espionage", "morath_spy_network_destroyed"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "counter_offer",
+        "label": "Offer Morath a seat at your table",
+        "narrative_hint": "If you cannot beat her network, absorb it. Give her legitimacy in exchange for her loyalty — or at least her neutrality. But can you ever truly trust the Schemer?",
+        "impacts": {
+          "gold": [-50, -30],
+          "food": [0, 0],
+          "military": [0, 5],
+          "loyalty": [-10, -5],
+          "population": [0, 0],
+          "reputation": [-10, 0]
+        },
+        "flags_set": ["morath_allied", "allied_with_lady_morath"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "turn_agents",
+        "label": "Turn her agents against her — fight shadow with shadow",
+        "narrative_hint": "Gold changes hands in dark alleys. Morath's own people begin feeding her false intelligence. Brilliant if it works, catastrophic if she discovers the betrayal.",
+        "impacts": {
+          "gold": [-70, -40],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-5, 5],
+          "population": [0, 0],
+          "reputation": [-5, 5]
+        },
+        "flags_set": ["morath_subverted"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act3_ashford_summit",
+    "title": "The Diplomat's Final Offer",
+    "acts": [3],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 70,
+      "max_day": 90,
+      "required_flags": ["ashford_encountered"],
+      "blocked_by_flags": ["ashford_allied", "ashford_defeated_political"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["diplomatic_summits", "rival_lord_confrontation", "throne_room_politics"],
+    "options": [
+      {
+        "id": "accept_alliance",
+        "label": "Accept Ashford's terms — a political union",
+        "narrative_hint": "Ashford's terms are generous but binding. A formal alliance with shared governance and trade. Your sovereignty shrinks, but your power grows. The question is who truly leads this union.",
+        "impacts": {
+          "gold": [30, 60],
+          "food": [20, 40],
+          "military": [-5, 0],
+          "loyalty": [-15, -5],
+          "population": [50, 100],
+          "reputation": [10, 20]
+        },
+        "flags_set": ["ashford_allied", "allied_with_duke_ashford", "council_support_gained"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "reject_and_undermine",
+        "label": "Reject his offer and undermine his base",
+        "narrative_hint": "Ashford's smile fades. Behind the scenes, you've already been courting his bannermen, promising them better terms. The diplomat discovers that his own weapon can be turned against him.",
+        "impacts": {
+          "gold": [-40, -20],
+          "food": [0, 0],
+          "military": [0, 5],
+          "loyalty": [5, 10],
+          "population": [0, 0],
+          "reputation": [-10, 0]
+        },
+        "flags_set": ["ashford_defeated_political", "ashford_undermined"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "counter_proposal",
+        "label": "Counter with your own terms — alliance on your conditions",
+        "narrative_hint": "You rewrite the treaty. Ashford gets trade rights but no governance power. He bristles, but your reputation may be enough to force his hand. A gamble on prestige.",
+        "impacts": {
+          "gold": [10, 30],
+          "food": [10, 20],
+          "military": [0, 0],
+          "loyalty": [0, 5],
+          "population": [20, 50],
+          "reputation": [-5, 10]
+        },
+        "flags_set": ["ashford_negotiating"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act3_assassination_attempt",
+    "title": "The Poisoned Crown",
+    "acts": [3],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 72,
+      "max_day": 95,
+      "required_flags": [],
+      "blocked_by_flags": ["assassination_survived", "assassin_turned"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["assassination_attempts", "noble_conspiracies", "throne_room_politics"],
+    "options": [
+      {
+        "id": "public_trial",
+        "label": "Capture the assassin and hold a public trial",
+        "narrative_hint": "The assassin is dragged before the court. The trial becomes a spectacle — evidence of conspiracy laid bare. The people see justice done, but the conspirators still in hiding now know you're hunting them.",
+        "impacts": {
+          "gold": [-20, -10],
+          "food": [0, 0],
+          "military": [0, 5],
+          "loyalty": [10, 20],
+          "population": [0, 0],
+          "reputation": [10, 20]
+        },
+        "flags_set": ["assassination_survived", "conspirators_exposed"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "quiet_elimination",
+        "label": "Silence the assassin and investigate quietly",
+        "narrative_hint": "The assassin vanishes into a dark cell. No trial, no spectacle — just quiet interrogation and the slow unraveling of the conspiracy. Effective, but the methods would disturb the public if they knew.",
+        "impacts": {
+          "gold": [-30, -15],
+          "food": [0, 0],
+          "military": [5, 10],
+          "loyalty": [-10, -5],
+          "population": [0, 0],
+          "reputation": [-5, 0]
+        },
+        "flags_set": ["assassination_survived", "shadow_investigation"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "use_as_double_agent",
+        "label": "Turn the assassin — make them your agent",
+        "narrative_hint": "Offer the assassin a choice: death or service. They become your eyes inside the conspiracy. Brilliantly dangerous — a turned assassin is still an assassin, after all.",
+        "impacts": {
+          "gold": [-50, -30],
+          "food": [0, 0],
+          "military": [5, 10],
+          "loyalty": [-5, 0],
+          "population": [0, 0],
+          "reputation": [-10, -5]
+        },
+        "flags_set": ["assassin_turned", "double_agent_active"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act3_peoples_mandate",
+    "title": "The People's Mandate",
+    "acts": [3],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 75,
+      "max_day": 95,
+      "required_flags": [],
+      "blocked_by_flags": ["peoples_mandate_resolved"],
+      "resource_min": {
+        "population": 800
+      }
+    },
+    "narrative_hooks": ["populist_movements", "peoples_mandate", "legacy_decisions"],
+    "options": [
+      {
+        "id": "embrace_populism",
+        "label": "Embrace the people's demands — open the granaries",
+        "narrative_hint": "Grain flows freely, debts are forgiven, the common folk cheer. The nobles mutter about weakness, but the streets sing your name. A ruler who feeds the people is loved — but love does not fill a war chest.",
+        "impacts": {
+          "gold": [-60, -40],
+          "food": [-80, -50],
+          "military": [-5, 0],
+          "loyalty": [15, 25],
+          "population": [100, 200],
+          "reputation": [15, 25]
+        },
+        "flags_set": ["peoples_mandate_resolved", "populist_champion", "populist_momentum"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "measured_reforms",
+        "label": "Offer measured reforms — enough to quiet unrest",
+        "narrative_hint": "Careful concessions and promises of future change. The firebrands are unsatisfied, but the moderates are placated. A political tightrope — too little for some, too much for others.",
+        "impacts": {
+          "gold": [-30, -15],
+          "food": [-30, -15],
+          "military": [0, 0],
+          "loyalty": [5, 10],
+          "population": [30, 60],
+          "reputation": [5, 10]
+        },
+        "flags_set": ["peoples_mandate_resolved", "moderate_reforms"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "suppress_movement",
+        "label": "Suppress the movement — order must prevail",
+        "narrative_hint": "Guards in the streets. Curfews. Arrests. The movement crumbles under the weight of the state. The nobles approve, the soldiers obey, but the people remember. They always remember.",
+        "impacts": {
+          "gold": [-10, 0],
+          "food": [0, 0],
+          "military": [5, 10],
+          "loyalty": [-20, -10],
+          "population": [-50, -20],
+          "reputation": [-15, -5]
+        },
+        "flags_set": ["peoples_mandate_resolved", "populism_crushed"],
+        "flags_clear": ["populist_momentum"],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act3_border_last_stand",
+    "title": "The Last Stand at Ashenmarch",
+    "acts": [3],
+    "weight": 9,
+    "type": "combat",
+    "preconditions": {
+      "min_day": 75,
+      "max_day": 95,
+      "required_flags": [],
+      "blocked_by_flags": ["ashenmarch_resolved"],
+      "resource_min": {
+        "military": 20
+      }
+    },
+    "narrative_hooks": ["last_stand_defense", "military_campaign", "final_confrontation"],
+    "options": [
+      {
+        "id": "commit_heavily",
+        "label": "Commit heavily — hold the line at all costs",
+        "narrative_hint": "Every available soldier stands at Ashenmarch. The fortifications are manned, the trebuchets loaded. If the line holds, the invasion breaks. If it doesn't, there is nothing behind you.",
+        "impacts": {
+          "gold": [-50, -30],
+          "food": [-70, -40],
+          "military": [-15, -5],
+          "loyalty": [10, 20],
+          "population": [-80, -40],
+          "reputation": [15, 25]
+        },
+        "flags_set": ["ashenmarch_resolved", "ashenmarch_held", "battle_won_ashenmarch"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_moderately",
+        "label": "Commit moderately — a fighting retreat if needed",
+        "narrative_hint": "Hold what you can, give ground where you must. The plan is sound but uninspiring — survival over glory. Casualties will be lower, but so will the stories told afterward.",
+        "impacts": {
+          "gold": [-30, -15],
+          "food": [-40, -20],
+          "military": [-8, -3],
+          "loyalty": [0, 10],
+          "population": [-50, -20],
+          "reputation": [5, 10]
+        },
+        "flags_set": ["ashenmarch_resolved", "battle_won_ashenmarch"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_lightly",
+        "label": "Commit lightly — guerrilla defense only",
+        "narrative_hint": "Small bands harass the invaders from the hills. The march is slowed, not stopped. You preserve strength but surrender territory. The refugees will arrive before the enemy does.",
+        "impacts": {
+          "gold": [-10, -5],
+          "food": [-20, -10],
+          "military": [-3, 0],
+          "loyalty": [-5, 0],
+          "population": [-30, -10],
+          "reputation": [-5, 5]
+        },
+        "flags_set": ["ashenmarch_resolved", "ashenmarch_guerrilla"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "retreat",
+        "label": "Retreat — abandon the border",
+        "narrative_hint": "The border falls without a fight. Ashenmarch burns behind you as the army withdraws to the capital. Every step back is a step closer to the throne room — and the final reckoning.",
+        "impacts": {
+          "gold": [0, 10],
+          "food": [-10, 0],
+          "military": [5, 10],
+          "loyalty": [-15, -5],
+          "population": [-60, -30],
+          "reputation": [-20, -10]
+        },
+        "flags_set": ["ashenmarch_resolved", "ashenmarch_abandoned"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act3_noble_conspiracy",
+    "title": "The Old Guard's Gambit",
+    "acts": [3],
+    "weight": 8,
+    "type": "advisor",
+    "preconditions": {
+      "min_day": 70,
+      "max_day": 90,
+      "required_flags": [],
+      "blocked_by_flags": ["noble_conspiracy_resolved"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["noble_conspiracies", "throne_room_politics", "council_corruption"],
+    "options": [
+      {
+        "id": "confront_nobles",
+        "label": "Confront the conspirators in open court",
+        "narrative_hint": "Name them before the assembled court. Let the accusation ring from the throne. Some will kneel, some will run, some will fight. But the message is clear: no one is above the crown.",
+        "impacts": {
+          "gold": [-20, -10],
+          "food": [0, 0],
+          "military": [0, 5],
+          "loyalty": [5, 15],
+          "population": [0, 0],
+          "reputation": [10, 15]
+        },
+        "flags_set": ["noble_conspiracy_resolved", "nobles_confronted", "council_support_gained"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "infiltrate_conspiracy",
+        "label": "Infiltrate their circle — learn their full plan",
+        "narrative_hint": "Play the fool while your agents listen at keyholes. The conspiracy grows comfortable, reveals its full shape. When you finally strike, you take them all — roots and branches. But delay carries its own risks.",
+        "impacts": {
+          "gold": [-40, -20],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-5, 0],
+          "population": [0, 0],
+          "reputation": [0, 5]
+        },
+        "flags_set": ["noble_conspiracy_resolved", "conspiracy_infiltrated", "double_agent_active"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "co_opt_nobles",
+        "label": "Co-opt the ringleaders — give them what they want",
+        "narrative_hint": "Titles, lands, influence — the currency of noble ambition. The conspiracy evaporates when its leaders get seats at the table. But you've just rewarded treason, and everyone noticed.",
+        "impacts": {
+          "gold": [-60, -30],
+          "food": [0, 0],
+          "military": [5, 10],
+          "loyalty": [-10, -5],
+          "population": [0, 0],
+          "reputation": [-15, -5]
+        },
+        "flags_set": ["noble_conspiracy_resolved", "nobles_co_opted", "council_support_gained"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act3_populist_uprising",
+    "title": "The Burning Commons",
+    "acts": [3],
+    "weight": 8,
+    "type": "combat",
+    "preconditions": {
+      "min_day": 78,
+      "max_day": 96,
+      "required_flags": [],
+      "blocked_by_flags": ["uprising_resolved"],
+      "resource_min": {
+        "population": 600
+      }
+    },
+    "narrative_hooks": ["populist_movements", "last_stand_defense", "peoples_mandate"],
+    "options": [
+      {
+        "id": "commit_heavily",
+        "label": "Commit heavily — crush the uprising with force",
+        "narrative_hint": "Soldiers against citizens. The uprising is put down street by street, barricade by barricade. Order returns, but the cobblestones are stained. A ruler who wages war against their own people wins a hollow victory.",
+        "impacts": {
+          "gold": [-30, -15],
+          "food": [10, 30],
+          "military": [-10, -5],
+          "loyalty": [-25, -15],
+          "population": [-150, -80],
+          "reputation": [-20, -10]
+        },
+        "flags_set": ["uprising_resolved", "uprising_crushed", "battle_won_uprising"],
+        "flags_clear": ["populist_momentum"],
+        "chain": null
+      },
+      {
+        "id": "commit_moderately",
+        "label": "Commit moderately — contain but don't destroy",
+        "narrative_hint": "Cordons and curfews, not charges and volleys. The uprising is contained, its leaders isolated. Some blood is spilled, but not rivers. A compromise between authority and mercy.",
+        "impacts": {
+          "gold": [-20, -10],
+          "food": [-10, -5],
+          "military": [-5, -2],
+          "loyalty": [-10, -5],
+          "population": [-60, -30],
+          "reputation": [-5, 5]
+        },
+        "flags_set": ["uprising_resolved", "uprising_contained"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_lightly",
+        "label": "Commit lightly — protect key buildings only",
+        "narrative_hint": "Guards stand at the granary, the treasury, the palace. The rest of the city burns or doesn't — that's up to the people now. A cold calculus that preserves power but abandons the streets.",
+        "impacts": {
+          "gold": [10, 30],
+          "food": [-30, -15],
+          "military": [0, 0],
+          "loyalty": [-15, -5],
+          "population": [-80, -40],
+          "reputation": [-10, 0]
+        },
+        "flags_set": ["uprising_resolved", "key_holdings_secured"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "retreat",
+        "label": "Retreat — negotiate with the rebel leaders",
+        "narrative_hint": "The throne extends an olive branch. Rebel leaders are invited to parley, their grievances heard. The military stands down. It looks like weakness to the nobles, but the people see a ruler who listens.",
+        "impacts": {
+          "gold": [-40, -20],
+          "food": [-40, -20],
+          "military": [-5, 0],
+          "loyalty": [10, 20],
+          "population": [0, 50],
+          "reputation": [10, 20]
+        },
+        "flags_set": ["uprising_resolved", "rebel_parley", "populist_momentum"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act3_siege_iron_hold",
+    "title": "The Siege of Iron Hold",
+    "acts": [3],
+    "weight": 9,
+    "type": "combat",
+    "preconditions": {
+      "min_day": 80,
+      "max_day": 98,
+      "required_flags": [],
+      "blocked_by_flags": ["iron_hold_resolved"],
+      "resource_min": {
+        "military": 25
+      }
+    },
+    "narrative_hooks": ["military_campaign", "final_confrontation", "last_stand_defense"],
+    "options": [
+      {
+        "id": "commit_heavily",
+        "label": "Commit heavily — full siege with everything you have",
+        "narrative_hint": "Siege towers, sappers, catapults, and ten thousand soldiers. Iron Hold will fall — the question is how many of your people fall with it. A total commitment that leaves nothing in reserve.",
+        "impacts": {
+          "gold": [-80, -50],
+          "food": [-100, -60],
+          "military": [-15, -8],
+          "loyalty": [5, 15],
+          "population": [-100, -50],
+          "reputation": [20, 30]
+        },
+        "flags_set": ["iron_hold_resolved", "iron_hold_captured", "battle_won_iron_hold"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_moderately",
+        "label": "Commit moderately — starve them out",
+        "narrative_hint": "Surround the fortress and wait. No glorious assault, no dramatic breach. Just the slow, patient mathematics of hunger. It will take time and supplies — but time may be something you don't have.",
+        "impacts": {
+          "gold": [-40, -25],
+          "food": [-60, -30],
+          "military": [-5, -2],
+          "loyalty": [-5, 5],
+          "population": [-40, -20],
+          "reputation": [5, 15]
+        },
+        "flags_set": ["iron_hold_resolved", "iron_hold_besieged", "battle_won_iron_hold"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_lightly",
+        "label": "Commit lightly — probe for weakness",
+        "narrative_hint": "Send scouts and sappers, not armies. Look for the crack in the walls, the traitor inside the gates. A gambler's approach — low cost, uncertain reward.",
+        "impacts": {
+          "gold": [-20, -10],
+          "food": [-20, -10],
+          "military": [-3, 0],
+          "loyalty": [-5, 0],
+          "population": [-20, -10],
+          "reputation": [-5, 5]
+        },
+        "flags_set": ["iron_hold_resolved", "iron_hold_probed"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "retreat",
+        "label": "Retreat — bypass Iron Hold entirely",
+        "narrative_hint": "Leave the fortress standing. March around it. Iron Hold becomes an enemy at your back, a thorn that will fester. But the campaign continues, and sometimes the indirect path is the only path.",
+        "impacts": {
+          "gold": [0, 10],
+          "food": [0, 10],
+          "military": [0, 5],
+          "loyalty": [-10, -5],
+          "population": [0, 0],
+          "reputation": [-15, -5]
+        },
+        "flags_set": ["iron_hold_resolved", "iron_hold_bypassed"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act3_legacy_decision",
+    "title": "The Shape of What Remains",
+    "acts": [3],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 85,
+      "max_day": 98,
+      "required_flags": [],
+      "blocked_by_flags": ["legacy_chosen"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["legacy_decisions", "throne_room_politics", "peoples_mandate"],
+    "options": [
+      {
+        "id": "legacy_of_law",
+        "label": "Establish a code of law — enshrine rights for all",
+        "narrative_hint": "Scribes work through the night. A new legal code — rights for peasants, limits on noble power, fair courts. It will outlast any king. The nobles see chains; the people see freedom. Both are right.",
+        "impacts": {
+          "gold": [-40, -20],
+          "food": [0, 0],
+          "military": [-5, 0],
+          "loyalty": [15, 25],
+          "population": [50, 100],
+          "reputation": [15, 25]
+        },
+        "flags_set": ["legacy_chosen", "legacy_of_law", "populist_momentum"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "legacy_of_steel",
+        "label": "Build a standing army — ensure security through strength",
+        "narrative_hint": "Fortresses rise, soldiers drill, armories fill. The realm becomes a fist. No enemy will dare strike — but the cost is staggering, and a realm that lives by the sword may die by it.",
+        "impacts": {
+          "gold": [-80, -50],
+          "food": [-40, -20],
+          "military": [15, 25],
+          "loyalty": [-10, -5],
+          "population": [-30, 0],
+          "reputation": [5, 10]
+        },
+        "flags_set": ["legacy_chosen", "legacy_of_steel"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "legacy_of_gold",
+        "label": "Invest in trade routes — prosperity as your monument",
+        "narrative_hint": "Roads, bridges, market charters, trade agreements. Gold flows like water. The realm grows fat and rich. But wealth attracts predators, and a prosperous realm without a strong sword arm is a prize waiting to be claimed.",
+        "impacts": {
+          "gold": [40, 80],
+          "food": [30, 50],
+          "military": [-5, 0],
+          "loyalty": [-5, 5],
+          "population": [50, 100],
+          "reputation": [5, 15]
+        },
+        "flags_set": ["legacy_chosen", "legacy_of_gold"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act3_final_summit",
+    "title": "The Summit of Crowns",
+    "acts": [3],
+    "weight": 8,
+    "type": "chain",
+    "preconditions": {
+      "min_day": 88,
+      "max_day": 100,
+      "required_flags": [],
+      "blocked_by_flags": ["summit_resolved"],
+      "resource_min": {
+        "reputation": 20
+      }
+    },
+    "narrative_hooks": ["diplomatic_summits", "final_confrontation", "legacy_decisions"],
+    "options": [
+      {
+        "id": "forge_grand_alliance",
+        "label": "Propose a grand alliance — unite the remaining lords",
+        "narrative_hint": "One table, all the powers that remain. A grand alliance against the chaos beyond the borders. It requires trust that may not exist and concessions that may be too great — but if it holds, nothing can break it.",
+        "impacts": {
+          "gold": [-60, -30],
+          "food": [-30, -15],
+          "military": [-5, 0],
+          "loyalty": [-5, 5],
+          "population": [50, 100],
+          "reputation": [20, 30]
+        },
+        "flags_set": ["summit_resolved", "grand_alliance_proposed", "council_support_gained"],
+        "flags_clear": [],
+        "chain": "act3_summit_aftermath"
+      },
+      {
+        "id": "demand_submission",
+        "label": "Demand submission — you are the supreme authority",
+        "narrative_hint": "No alliance of equals. There is one throne, and you sit upon it. The other lords can bend the knee or be broken. Bold, terrifying, and possibly suicidal if your strength doesn't match your words.",
+        "impacts": {
+          "gold": [0, 20],
+          "food": [0, 0],
+          "military": [5, 15],
+          "loyalty": [5, 15],
+          "population": [0, 0],
+          "reputation": [-10, 5]
+        },
+        "flags_set": ["summit_resolved", "submission_demanded"],
+        "flags_clear": [],
+        "chain": "act3_submission_aftermath"
+      },
+      {
+        "id": "sabotage_summit",
+        "label": "Sabotage the summit — let the other lords destroy each other",
+        "narrative_hint": "Whispered lies, forged letters, a poisoned chalice at the wrong seat. The summit collapses into accusations and drawn swords. In the chaos, only you know the truth. Machiavelli would weep with pride.",
+        "impacts": {
+          "gold": [-30, -15],
+          "food": [0, 0],
+          "military": [0, 5],
+          "loyalty": [-10, -5],
+          "population": [0, 0],
+          "reputation": [-20, -10]
+        },
+        "flags_set": ["summit_resolved", "summit_sabotaged"],
+        "flags_clear": [],
+        "chain": "act3_chaos_aftermath"
+      },
+      {
+        "id": "peoples_summit",
+        "label": "Open the summit to the common people",
+        "narrative_hint": "Unprecedented. Farmers and merchants sit beside lords and ladies. The nobility is horrified. The people are astonished. The world watches as power is shared — or at least appears to be. A revolutionary act with revolutionary consequences.",
+        "impacts": {
+          "gold": [-20, -10],
+          "food": [-20, -10],
+          "military": [-5, 0],
+          "loyalty": [15, 25],
+          "population": [80, 150],
+          "reputation": [15, 25]
+        },
+        "flags_set": ["summit_resolved", "peoples_summit_held", "populist_momentum", "council_support_gained"],
+        "flags_clear": [],
+        "chain": "act3_peoples_aftermath"
+      }
+    ]
+  }
+]

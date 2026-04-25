@@ -1,7 +1,7 @@
 ---
 title: "feat: Build Realm of Ruin TUI kingdom game as Claude Code skill"
 type: feat
-status: active
+status: completed
 date: 2026-04-25
 origin: docs/brainstorms/2026-04-25-realm-of-ruin-requirements.md
 deepened: 2026-04-25

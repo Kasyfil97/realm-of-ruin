@@ -1,0 +1,870 @@
+[
+  {
+    "id": "act2_voss_border_skirmish",
+    "title": "Voss's Raiders at the Border",
+    "acts": [2],
+    "weight": 10,
+    "type": "combat",
+    "preconditions": {
+      "min_day": 31,
+      "max_day": 50,
+      "required_flags": ["voss_encountered"],
+      "blocked_by_flags": ["voss_defeated_military", "allied_with_lord_voss"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["border_tension", "military_pressure", "voss_aggression"],
+    "options": [
+      {
+        "id": "commit_lightly",
+        "label": "Send a patrol to probe their lines",
+        "narrative_hint": "A cautious skirmish — your scouts test Voss's forces but avoid a decisive engagement. You learn something, but Voss sees hesitation.",
+        "impacts": {
+          "gold": [-15, -5],
+          "food": [-10, -5],
+          "military": [-3, -1],
+          "loyalty": [-3, 2],
+          "population": [0, 0],
+          "reputation": [-5, 0]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_moderately",
+        "label": "March a garrison force to repel the raiders",
+        "narrative_hint": "A respectable show of force. Your soldiers push back the raiders but take losses. Voss may think twice, or may escalate.",
+        "impacts": {
+          "gold": [-40, -20],
+          "food": [-25, -15],
+          "military": [-6, -2],
+          "loyalty": [3, 8],
+          "population": [-20, -5],
+          "reputation": [2, 8]
+        },
+        "flags_set": ["voss_border_contested"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_heavily",
+        "label": "Commit the full army to crush them decisively",
+        "narrative_hint": "An all-out assault. If successful, Voss's raiding force is shattered and his reputation suffers — but the cost in blood and coin is steep.",
+        "impacts": {
+          "gold": [-80, -50],
+          "food": [-40, -25],
+          "military": [-10, -4],
+          "loyalty": [5, 15],
+          "population": [-50, -20],
+          "reputation": [5, 15]
+        },
+        "flags_set": ["voss_border_won", "voss_border_contested"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "retreat",
+        "label": "Pull back and cede the border villages",
+        "narrative_hint": "Discretion wins today, but your people see cowardice. The border folk feel abandoned. Voss grows bolder.",
+        "impacts": {
+          "gold": [0, 5],
+          "food": [-10, 0],
+          "military": [0, 0],
+          "loyalty": [-12, -6],
+          "population": [-40, -15],
+          "reputation": [-10, -4]
+        },
+        "flags_set": ["border_ceded_to_voss"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act2_morath_spy_discovered",
+    "title": "A Serpent in the Court",
+    "acts": [2],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 33,
+      "max_day": 55,
+      "required_flags": ["morath_encountered"],
+      "blocked_by_flags": ["morath_spy_discovered", "allied_with_lady_morath"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["espionage", "betrayal", "morath_influence", "court_intrigue"],
+    "options": [
+      {
+        "id": "public_execution",
+        "label": "Execute the spy publicly as a warning",
+        "narrative_hint": "A brutal message to Lady Morath: her agents die screaming. Your court is rattled, but fear keeps tongues still. Morath takes it personally.",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [0, 2],
+          "loyalty": [-8, -3],
+          "population": [0, 0],
+          "reputation": [-5, 3]
+        },
+        "flags_set": ["morath_spy_discovered", "morath_angered"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "turn_double_agent",
+        "label": "Turn the spy into a double agent",
+        "narrative_hint": "A risky gambit. Feed Morath false intelligence through her own operative. If she discovers the ruse, the consequences will be severe.",
+        "impacts": {
+          "gold": [-30, -15],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-4, 0],
+          "population": [0, 0],
+          "reputation": [0, 5]
+        },
+        "flags_set": ["morath_spy_discovered", "morath_double_agent"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "release_with_message",
+        "label": "Release the spy with a peace overture to Morath",
+        "narrative_hint": "An act of calculated mercy. Morath may see wisdom in negotiation — or she may see weakness ripe for exploitation.",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-6, -2],
+          "population": [0, 0],
+          "reputation": [3, 10]
+        },
+        "flags_set": ["morath_spy_discovered", "morath_peace_offered"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act2_ashford_alliance_proposal",
+    "title": "The Diplomat's Offer",
+    "acts": [2],
+    "weight": 9,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 35,
+      "max_day": 60,
+      "required_flags": ["ashford_encountered"],
+      "blocked_by_flags": ["ashford_defeated_political", "allied_with_duke_ashford"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["alliance", "political_maneuvering", "ashford_calculation", "trade"],
+    "options": [
+      {
+        "id": "accept_terms",
+        "label": "Accept Ashford's alliance on his terms",
+        "narrative_hint": "Ashford's terms are lopsided but the alliance is genuine. You gain a powerful ally but at an ongoing cost that drains your treasury. Your people wonder who truly rules.",
+        "impacts": {
+          "gold": [-60, -35],
+          "food": [15, 30],
+          "military": [0, 5],
+          "loyalty": [-8, -3],
+          "population": [10, 30],
+          "reputation": [5, 12]
+        },
+        "flags_set": ["ashford_terms_accepted"],
+        "flags_clear": [],
+        "chain": "chain_alliance_terms"
+      },
+      {
+        "id": "counter_proposal",
+        "label": "Counter with your own terms",
+        "narrative_hint": "Bold negotiation. Ashford respects ambition but does not tolerate being dictated to. The talks could stall entirely.",
+        "impacts": {
+          "gold": [-20, -10],
+          "food": [0, 10],
+          "military": [0, 0],
+          "loyalty": [2, 6],
+          "population": [0, 0],
+          "reputation": [2, 8]
+        },
+        "flags_set": ["ashford_counter_proposed"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "reject_publicly",
+        "label": "Reject the alliance in open court",
+        "narrative_hint": "A dramatic refusal that energizes your base but makes a permanent enemy of the realm's most connected lord. Ashford does not forget humiliation.",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [5, 12],
+          "population": [0, 0],
+          "reputation": [-10, -3]
+        },
+        "flags_set": ["ashford_rejected"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act2_recruit_espionage_advisor",
+    "title": "The Shadow at Your Door",
+    "acts": [2],
+    "weight": 7,
+    "type": "advisor",
+    "preconditions": {
+      "min_day": 31,
+      "max_day": 50,
+      "required_flags": [],
+      "blocked_by_flags": ["has_espionage_advisor"],
+      "resource_min": {
+        "gold": 80
+      }
+    },
+    "narrative_hooks": ["espionage", "advisor_recruitment", "trust", "secrets"],
+    "options": [
+      {
+        "id": "hire_whisper",
+        "label": "Hire the operative and fund a spy network",
+        "narrative_hint": "A shadowy figure known only as Whisper offers their services. Their intelligence is invaluable but their loyalty is to coin, not crown. Your court grows uneasy around this new presence.",
+        "impacts": {
+          "gold": [-80, -50],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-6, -2],
+          "population": [0, 0],
+          "reputation": [-3, 2]
+        },
+        "flags_set": ["has_espionage_advisor"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "hire_conditionally",
+        "label": "Hire them on a trial basis with limited access",
+        "narrative_hint": "Cautious engagement. Whisper accepts the leash but chafes under restrictions. You get some intelligence but miss the deeper currents.",
+        "impacts": {
+          "gold": [-40, -25],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-3, 0],
+          "population": [0, 0],
+          "reputation": [-1, 1]
+        },
+        "flags_set": ["has_espionage_advisor"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "reject_spy",
+        "label": "Turn them away — spies cannot be trusted",
+        "narrative_hint": "Principled but potentially costly. Your court approves of the moral stand, but in a realm of scheming rivals, blindness has its price. Morath's agents operate unchecked.",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [-3, -1],
+          "loyalty": [3, 8],
+          "population": [0, 0],
+          "reputation": [2, 6]
+        },
+        "flags_set": ["espionage_advisor_rejected"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act2_recruit_diplomacy_advisor",
+    "title": "The Sage's Petition",
+    "acts": [2],
+    "weight": 7,
+    "type": "advisor",
+    "preconditions": {
+      "min_day": 34,
+      "max_day": 55,
+      "required_flags": [],
+      "blocked_by_flags": ["has_diplomacy_advisor"],
+      "resource_min": {
+        "gold": 60
+      }
+    },
+    "narrative_hooks": ["diplomacy", "advisor_recruitment", "idealism", "statecraft"],
+    "options": [
+      {
+        "id": "hire_corwin",
+        "label": "Welcome Sage Corwin to your council",
+        "narrative_hint": "An aging scholar-diplomat offers to serve your court. His idealism borders on naivety, but his network of contacts across rival courts is unmatched. Your military advisors distrust him.",
+        "impacts": {
+          "gold": [-60, -35],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-3, 2],
+          "population": [5, 15],
+          "reputation": [3, 10]
+        },
+        "flags_set": ["has_diplomacy_advisor"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "hire_as_envoy",
+        "label": "Hire him as an envoy, not a full advisor",
+        "narrative_hint": "A limited role. Corwin accepts gracefully but you miss the depth of his counsel. He serves as a messenger rather than a strategist.",
+        "impacts": {
+          "gold": [-30, -15],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [0, 3],
+          "population": [0, 5],
+          "reputation": [1, 5]
+        },
+        "flags_set": ["has_diplomacy_advisor"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "reject_diplomat",
+        "label": "Refuse — diplomats are a luxury you cannot afford",
+        "narrative_hint": "Your war council nods approval but the realm's political isolation deepens. Words, it seems, are weapons your rivals will wield without opposition.",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [2, 5],
+          "loyalty": [2, 6],
+          "population": [0, 0],
+          "reputation": [-5, -2]
+        },
+        "flags_set": ["diplomacy_advisor_rejected"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act2_marriage_offer",
+    "title": "A Crown of Thorns and Roses",
+    "acts": [2],
+    "weight": 7,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 38,
+      "max_day": 60,
+      "required_flags": ["morath_encountered"],
+      "blocked_by_flags": ["morath_married", "allied_with_lady_morath", "morath_angered"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["marriage", "alliance", "morath_influence", "personal_sacrifice"],
+    "options": [
+      {
+        "id": "accept_marriage",
+        "label": "Accept the marriage and bind your houses",
+        "narrative_hint": "A political marriage to Lady Morath's kin. The alliance is powerful but the entanglement is permanent. Morath's spies become your household, and your court whispers of puppet rulers.",
+        "impacts": {
+          "gold": [20, 50],
+          "food": [10, 25],
+          "military": [5, 10],
+          "loyalty": [-15, -8],
+          "population": [10, 30],
+          "reputation": [5, 12]
+        },
+        "flags_set": ["morath_marriage_accepted", "allied_with_lady_morath"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "negotiate_terms",
+        "label": "Negotiate stricter marriage terms to limit Morath's influence",
+        "narrative_hint": "You try to bind Morath while keeping her at arm's length. The negotiations are tense and may collapse, but if they hold, you gain an ally without losing sovereignty.",
+        "impacts": {
+          "gold": [-25, -10],
+          "food": [5, 15],
+          "military": [2, 5],
+          "loyalty": [-8, -3],
+          "population": [5, 15],
+          "reputation": [2, 8]
+        },
+        "flags_set": ["morath_marriage_negotiated"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "decline_gracefully",
+        "label": "Decline with diplomatic courtesy",
+        "narrative_hint": "A polite refusal that preserves relations but closes a door. Morath accepts the rejection outwardly but privately considers you an obstacle rather than a partner.",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [3, 8],
+          "population": [0, 0],
+          "reputation": [-3, 2]
+        },
+        "flags_set": ["morath_marriage_declined"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act2_trade_route_control",
+    "title": "The Crossroads Toll",
+    "acts": [2],
+    "weight": 9,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 32,
+      "max_day": 58,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["trade", "economy", "territory", "rival_tension"],
+    "options": [
+      {
+        "id": "seize_route",
+        "label": "Seize the trade route and impose heavy tolls",
+        "narrative_hint": "Aggressive commerce — you garrison the crossroads and tax every wagon. Gold flows in but merchants reroute and neighboring lords cry foul. Ashford in particular takes notice.",
+        "impacts": {
+          "gold": [30, 60],
+          "food": [-15, -5],
+          "military": [-4, -2],
+          "loyalty": [-5, 0],
+          "population": [-15, 0],
+          "reputation": [-8, -3]
+        },
+        "flags_set": ["trade_route_seized"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "negotiate_shared",
+        "label": "Negotiate shared control with neighboring lords",
+        "narrative_hint": "Diplomacy at the crossroads. You split the revenue but build goodwill. The arrangement is fragile and requires ongoing maintenance — and stationing guards at the crossing costs soldiers.",
+        "impacts": {
+          "gold": [10, 25],
+          "food": [5, 15],
+          "military": [-3, -1],
+          "loyalty": [2, 6],
+          "population": [5, 15],
+          "reputation": [3, 8]
+        },
+        "flags_set": ["trade_route_shared"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "tax_lightly",
+        "label": "Maintain the route but keep tolls minimal",
+        "narrative_hint": "A light touch that attracts merchants but earns modest revenue. Your people benefit from cheaper goods, but rival merchants exploit the open road to undercut your own traders.",
+        "impacts": {
+          "gold": [-5, 15],
+          "food": [10, 20],
+          "military": [-2, 0],
+          "loyalty": [3, 7],
+          "population": [10, 25],
+          "reputation": [1, 5]
+        },
+        "flags_set": ["trade_route_open"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "blockade_rivals",
+        "label": "Blockade the route to starve rival supply lines",
+        "narrative_hint": "A wartime maneuver in peacetime. You hurt your rivals but devastate local commerce. Merchants flee, but Voss and Morath feel the pinch.",
+        "impacts": {
+          "gold": [-20, -5],
+          "food": [-25, -10],
+          "military": [2, 5],
+          "loyalty": [-8, -3],
+          "population": [-30, -10],
+          "reputation": [-6, -1]
+        },
+        "flags_set": ["trade_route_blockaded"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act2_mercenary_company",
+    "title": "The Iron Wolves",
+    "acts": [2],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 35,
+      "max_day": 60,
+      "required_flags": [],
+      "blocked_by_flags": ["mercenaries_hired"],
+      "resource_min": {
+        "gold": 100
+      }
+    },
+    "narrative_hooks": ["mercenaries", "military", "gold", "loyalty_tension"],
+    "options": [
+      {
+        "id": "hire_full_company",
+        "label": "Hire the full company — pay their price",
+        "narrative_hint": "The Iron Wolves are expensive but fearsome. Your army swells dramatically, but mercenary loyalty is bought, not earned. Your regular soldiers resent the newcomers.",
+        "impacts": {
+          "gold": [-120, -80],
+          "food": [-30, -15],
+          "military": [12, 20],
+          "loyalty": [-8, -3],
+          "population": [0, 0],
+          "reputation": [-3, 3]
+        },
+        "flags_set": ["mercenaries_hired"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "hire_scouts_only",
+        "label": "Hire only their scouts and outriders",
+        "narrative_hint": "A selective contract. You gain elite reconnaissance without the full cost or the loyalty problems. But in a pitched battle, scouts alone will not turn the tide.",
+        "impacts": {
+          "gold": [-50, -30],
+          "food": [-10, -5],
+          "military": [4, 8],
+          "loyalty": [-3, 0],
+          "population": [0, 0],
+          "reputation": [0, 2]
+        },
+        "flags_set": ["mercenary_scouts_hired"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "refuse_mercenaries",
+        "label": "Refuse — your army fights for honor, not coin",
+        "narrative_hint": "Principled but militarily costly. Your soldiers respect the decision but the Iron Wolves sell their swords to Lord Voss instead, strengthening his forces.",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [-4, -1],
+          "loyalty": [5, 10],
+          "population": [0, 0],
+          "reputation": [2, 6]
+        },
+        "flags_set": ["mercenaries_refused"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act2_resource_raid",
+    "title": "Raid on the Granaries",
+    "acts": [2],
+    "weight": 9,
+    "type": "combat",
+    "preconditions": {
+      "min_day": 36,
+      "max_day": 55,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["raiding", "food_crisis", "military_response", "bandit_threat"],
+    "options": [
+      {
+        "id": "commit_lightly",
+        "label": "Send a small detachment to guard the granaries",
+        "narrative_hint": "A token force protects some grain but the raiders are numerous. You save what you can but the losses sting. People grumble about inadequate protection.",
+        "impacts": {
+          "gold": [-10, -5],
+          "food": [-40, -20],
+          "military": [-2, 0],
+          "loyalty": [-5, -1],
+          "population": [-10, 0],
+          "reputation": [-3, 1]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_moderately",
+        "label": "Deploy a garrison to intercept the raiders",
+        "narrative_hint": "A solid defensive response. Your soldiers engage the raiders and recover most of the stolen grain, though casualties mount and the campaign costs.",
+        "impacts": {
+          "gold": [-30, -15],
+          "food": [-20, -5],
+          "military": [-4, -1],
+          "loyalty": [2, 7],
+          "population": [-15, -5],
+          "reputation": [2, 6]
+        },
+        "flags_set": ["granary_defended"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_heavily",
+        "label": "Launch a punitive expedition to destroy the raiders' camp",
+        "narrative_hint": "A devastating counter-strike. You annihilate the raider camp and recover stolen goods, but the campaign strips your army and strains supplies. Rumors suggest the raiders were funded by a rival lord.",
+        "impacts": {
+          "gold": [-60, -35],
+          "food": [10, 30],
+          "military": [-8, -3],
+          "loyalty": [5, 12],
+          "population": [-30, -10],
+          "reputation": [4, 10]
+        },
+        "flags_set": ["raiders_destroyed", "granary_defended"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "retreat",
+        "label": "Abandon the outer granaries and consolidate supplies",
+        "narrative_hint": "A painful triage. You save your soldiers but the grain burns. Hunger will follow, and the raiders grow emboldened for next time.",
+        "impacts": {
+          "gold": [0, 5],
+          "food": [-60, -35],
+          "military": [0, 1],
+          "loyalty": [-10, -5],
+          "population": [-20, -5],
+          "reputation": [-6, -2]
+        },
+        "flags_set": ["granaries_lost"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act2_internal_betrayal",
+    "title": "The Traitor's Ledger",
+    "acts": [2],
+    "weight": 8,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 40,
+      "max_day": 60,
+      "required_flags": [],
+      "blocked_by_flags": ["traitor_resolved"],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["betrayal", "court_intrigue", "internal_conflict", "trust"],
+    "options": [
+      {
+        "id": "investigate_quietly",
+        "label": "Launch a quiet investigation before acting",
+        "narrative_hint": "Patience and subtlety. You trace the corruption through your court, uncovering its full extent. But the delay allows the traitor to destroy evidence — or worse, to act first.",
+        "impacts": {
+          "gold": [-25, -10],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-5, 0],
+          "population": [0, 0],
+          "reputation": [0, 5]
+        },
+        "flags_set": ["traitor_investigated"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "arrest_immediately",
+        "label": "Arrest the suspects immediately",
+        "narrative_hint": "Swift justice — or swift injustice. You round up the suspected traitors and make examples of them. Some are guilty, but innocents may be caught in the net. Fear settles over the court.",
+        "impacts": {
+          "gold": [-10, 0],
+          "food": [0, 0],
+          "military": [1, 4],
+          "loyalty": [-10, -4],
+          "population": [-10, 0],
+          "reputation": [-6, 0]
+        },
+        "flags_set": ["traitor_resolved", "court_purge"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "offer_amnesty",
+        "label": "Offer amnesty in exchange for information",
+        "narrative_hint": "Mercy as strategy. The traitor reveals their patron — a rival lord — but your court questions whether betrayal should go unpunished. Trust is cheapened.",
+        "impacts": {
+          "gold": [0, 10],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-8, -2],
+          "population": [0, 0],
+          "reputation": [3, 8]
+        },
+        "flags_set": ["traitor_resolved", "traitor_pardoned"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act2_voss_open_battle",
+    "title": "The Warlord's Challenge",
+    "acts": [2],
+    "weight": 8,
+    "type": "combat",
+    "preconditions": {
+      "min_day": 45,
+      "max_day": 65,
+      "required_flags": ["voss_encountered", "voss_border_contested"],
+      "blocked_by_flags": ["voss_defeated_military", "allied_with_lord_voss"],
+      "resource_min": {
+        "military": 25
+      }
+    },
+    "narrative_hooks": ["open_battle", "voss_confrontation", "military_glory", "decisive_combat"],
+    "options": [
+      {
+        "id": "commit_lightly",
+        "label": "Accept the challenge with a defensive posture",
+        "narrative_hint": "You meet Voss on the field but hold back your reserves. A measured response that limits losses but also limits any chance of a decisive outcome. Voss mocks your caution.",
+        "impacts": {
+          "gold": [-25, -10],
+          "food": [-20, -10],
+          "military": [-5, -2],
+          "loyalty": [-2, 3],
+          "population": [-15, -5],
+          "reputation": [-3, 3]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_moderately",
+        "label": "Match his forces with a balanced army",
+        "narrative_hint": "An even contest of arms. The battle could go either way, and the outcome will reshape the power balance. Win or lose, this fight will be remembered.",
+        "impacts": {
+          "gold": [-50, -30],
+          "food": [-35, -20],
+          "military": [-8, -3],
+          "loyalty": [3, 10],
+          "population": [-40, -15],
+          "reputation": [3, 12]
+        },
+        "flags_set": ["voss_battle_fought"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "commit_heavily",
+        "label": "Throw everything into a decisive victory",
+        "narrative_hint": "All or nothing. You commit every soldier, every reserve, every resource to crushing Voss on the field. Victory here could break his power forever — but defeat would leave you defenseless.",
+        "impacts": {
+          "gold": [-100, -60],
+          "food": [-50, -30],
+          "military": [-15, -6],
+          "loyalty": [8, 18],
+          "population": [-60, -25],
+          "reputation": [8, 20]
+        },
+        "flags_set": ["voss_defeated_military", "voss_battle_fought"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "retreat",
+        "label": "Refuse the challenge and fortify your stronghold",
+        "narrative_hint": "You deny Voss the open battle he craves. Your walls are strong, but your reputation suffers. Voss parades through your lands unopposed, burning villages to draw you out.",
+        "impacts": {
+          "gold": [0, 10],
+          "food": [-15, -5],
+          "military": [0, 2],
+          "loyalty": [-15, -8],
+          "population": [-30, -10],
+          "reputation": [-12, -5]
+        },
+        "flags_set": ["voss_challenge_refused"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "act2_political_maneuvering",
+    "title": "The Council of Thorns",
+    "acts": [2],
+    "weight": 10,
+    "type": "dilemma",
+    "preconditions": {
+      "min_day": 40,
+      "max_day": 65,
+      "required_flags": ["ashford_encountered"],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": ["politics", "council", "ashford_influence", "power_struggle", "legitimacy"],
+    "options": [
+      {
+        "id": "play_factions",
+        "label": "Play the council factions against each other",
+        "narrative_hint": "Machiavellian scheming. You pit Ashford's supporters against Voss's allies and extract concessions from both. Clever, but dangerous — if either side discovers your game, you face unified opposition.",
+        "impacts": {
+          "gold": [10, 30],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-10, -4],
+          "population": [0, 0],
+          "reputation": [-5, 5]
+        },
+        "flags_set": ["council_manipulated"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "build_own_bloc",
+        "label": "Build your own voting bloc with gifts and promises",
+        "narrative_hint": "Patronage politics. You buy loyalty with gold and favors, building a coalition of minor lords who owe you everything. Expensive but effective — until the money runs out.",
+        "impacts": {
+          "gold": [-75, -40],
+          "food": [-10, 0],
+          "military": [0, 0],
+          "loyalty": [3, 8],
+          "population": [5, 15],
+          "reputation": [5, 12]
+        },
+        "flags_set": ["council_support_built"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "denounce_corruption",
+        "label": "Denounce the council's corruption publicly",
+        "narrative_hint": "A bold populist move. You call out the rot in the political system, winning the hearts of commoners but alienating the very lords you need to govern. Ashford is furious.",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [5, 12],
+          "population": [15, 40],
+          "reputation": [-8, 5]
+        },
+        "flags_set": ["council_denounced"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "abstain",
+        "label": "Abstain and let the council sort itself out",
+        "narrative_hint": "Strategic patience — or fatal indecision. You conserve political capital while others exhaust theirs. But the council's decisions may not favor your interests.",
+        "impacts": {
+          "gold": [0, 10],
+          "food": [0, 5],
+          "military": [0, 0],
+          "loyalty": [-5, 0],
+          "population": [0, 0],
+          "reputation": [-4, 0]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  }
+]

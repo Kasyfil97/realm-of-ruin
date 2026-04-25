@@ -1,0 +1,579 @@
+[
+  {
+    "id": "transition_act1_to_act2",
+    "title": "The Envoy's Arrival",
+    "acts": [1],
+    "weight": 0,
+    "type": "transition",
+    "preconditions": {
+      "min_day": 25,
+      "max_day": 35,
+      "required_flags": [],
+      "blocked_by_flags": ["act_transition_1_2"],
+      "resource_min": {}
+    },
+    "narrative_hooks": [
+      "A rival lord's envoy arrives at court bearing demands and thinly veiled threats",
+      "The shift from local governance to regional politics begins here",
+      "This marks the end of Act 1 — the player can no longer ignore the wider world",
+      "Claude should emphasize the weight of this moment: the player's domain is now on the map"
+    ],
+    "options": [
+      {
+        "id": "accept_tribute",
+        "label": "Accept the tribute terms",
+        "narrative_hint": "Reluctant submission; the player buys time but at a cost to pride and treasury",
+        "impacts": {
+          "gold": [-100, -60],
+          "food": [-50, -30],
+          "military": [0, 0],
+          "loyalty": [-8, -4],
+          "population": [0, 0],
+          "reputation": [-6, -3]
+        },
+        "flags_set": ["act_transition_1_2", "tribute_paid"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "reject_defiantly",
+        "label": "Reject the envoy with defiance",
+        "narrative_hint": "Bold refusal; the court rallies but war drums sound on the horizon",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [-6, -3],
+          "loyalty": [5, 10],
+          "population": [0, 0],
+          "reputation": [4, 8]
+        },
+        "flags_set": ["act_transition_1_2", "envoy_rejected", "rival_hostile"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "negotiate_terms",
+        "label": "Negotiate a compromise",
+        "narrative_hint": "Shrewd diplomacy; neither side fully satisfied but bloodshed is delayed",
+        "impacts": {
+          "gold": [-50, -25],
+          "food": [-25, -10],
+          "military": [0, 0],
+          "loyalty": [0, 3],
+          "population": [0, 0],
+          "reputation": [1, 4]
+        },
+        "flags_set": ["act_transition_1_2", "envoy_negotiated"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "transition_act2_to_act3",
+    "title": "Death of the Emperor",
+    "acts": [2],
+    "weight": 0,
+    "type": "transition",
+    "preconditions": {
+      "min_day": 55,
+      "max_day": 70,
+      "required_flags": ["act_transition_1_2"],
+      "blocked_by_flags": ["act_transition_2_3"],
+      "resource_min": {}
+    },
+    "narrative_hooks": [
+      "A rider arrives bearing black banners — the emperor is dead with no heir",
+      "The realm fractures as every lord with ambition sees a chance at the throne",
+      "This is the hinge of the entire story; Act 3 is the endgame",
+      "Claude should convey the seismic shock — the old order is gone forever"
+    ],
+    "options": [
+      {
+        "id": "declare_intent",
+        "label": "Declare your intent for the throne",
+        "narrative_hint": "Bold and public; every eye in the realm turns toward you — ally and enemy alike",
+        "impacts": {
+          "gold": [-75, -40],
+          "food": [0, 0],
+          "military": [-8, -4],
+          "loyalty": [5, 10],
+          "population": [0, 0],
+          "reputation": [6, 10]
+        },
+        "flags_set": ["act_transition_2_3", "throne_declared", "public_claimant"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "gather_allies",
+        "label": "Quietly gather allies behind closed doors",
+        "narrative_hint": "Patient and diplomatic; build strength in the shadows before revealing your hand",
+        "impacts": {
+          "gold": [-40, -20],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [3, 6],
+          "population": [0, 0],
+          "reputation": [2, 5]
+        },
+        "flags_set": ["act_transition_2_3", "quiet_alliance", "diplomatic_approach"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "seize_territory",
+        "label": "Seize nearby territory while rivals mourn",
+        "narrative_hint": "Ruthlessly aggressive; territory gained but honor questioned — some will call you a vulture",
+        "impacts": {
+          "gold": [30, 75],
+          "food": [40, 80],
+          "military": [-10, -5],
+          "loyalty": [-10, -5],
+          "population": [50, 150],
+          "reputation": [-8, -4]
+        },
+        "flags_set": ["act_transition_2_3", "territory_seized", "aggressive_expansion"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "transition_forced",
+    "title": "The Winds of Change",
+    "acts": [1, 2],
+    "weight": 0,
+    "type": "transition",
+    "preconditions": {
+      "min_day": null,
+      "max_day": null,
+      "required_flags": [],
+      "blocked_by_flags": [],
+      "resource_min": {}
+    },
+    "narrative_hooks": [
+      "This is a fallback transition that fires when the transition window expires without the primary event triggering",
+      "Claude MUST adapt the tone based on which transition is occurring: Act 1->2 should feel like growing threats from beyond your borders; Act 2->3 should feel like the collapse of central authority",
+      "Keep it brief but impactful — the player should feel the world shifting under their feet",
+      "If transitioning 1->2, reference rising tensions with rival lords; if 2->3, reference power vacuum and chaos"
+    ],
+    "options": [
+      {
+        "id": "embrace_change",
+        "label": "Embrace the new reality",
+        "narrative_hint": "Forward-looking; the player adapts and looks for opportunity in upheaval",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [3, 6],
+          "population": [0, 0],
+          "reputation": [2, 4]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "hunker_down",
+        "label": "Fortify and prepare for the worst",
+        "narrative_hint": "Defensive and cautious; shore up defenses at the cost of outward influence",
+        "impacts": {
+          "gold": [-30, -15],
+          "food": [-20, -10],
+          "military": [3, 6],
+          "loyalty": [2, 4],
+          "population": [0, 0],
+          "reputation": [-3, -1]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "seize_moment",
+        "label": "Act boldly while others hesitate",
+        "narrative_hint": "Opportunistic; risk and reward in equal measure as the player strikes while the iron is hot",
+        "impacts": {
+          "gold": [-25, -10],
+          "food": [0, 0],
+          "military": [-4, -2],
+          "loyalty": [-3, 0],
+          "population": [0, 0],
+          "reputation": [3, 7]
+        },
+        "flags_set": [],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "victory_throne_claim",
+    "title": "The Throne Awaits",
+    "acts": [3],
+    "weight": 0,
+    "type": "victory",
+    "preconditions": {
+      "min_day": 80,
+      "max_day": null,
+      "required_flags": ["act_transition_2_3"],
+      "blocked_by_flags": ["victory_claimed"],
+      "resource_min": {}
+    },
+    "narrative_hooks": [
+      "The path to the throne is clear — rivals are defeated or allied, the realm awaits a ruler",
+      "This is the narrative epilogue; ALL options lead to victory",
+      "Claude should make this feel momentous — the culmination of everything the player has built",
+      "Reflect on the player's journey: their choices, sacrifices, and the kind of realm they shaped",
+      "The tone should match the option chosen — triumphant, solemn, pragmatic, or populist"
+    ],
+    "options": [
+      {
+        "id": "benevolent_ruler",
+        "label": "Rule with wisdom and compassion",
+        "narrative_hint": "The just ruler; beloved by the people, a golden age begins — but the treasury bears the cost of generosity",
+        "impacts": {
+          "gold": [-100, -60],
+          "food": [50, 100],
+          "military": [0, 0],
+          "loyalty": [15, 25],
+          "population": [100, 250],
+          "reputation": [5, 10]
+        },
+        "flags_set": ["victory_claimed", "victory_benevolent"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "iron_emperor",
+        "label": "Rule with an iron fist",
+        "narrative_hint": "The tyrant ascends; order through fear, strength through domination — but the people's love withers",
+        "impacts": {
+          "gold": [0, 50],
+          "food": [0, 0],
+          "military": [10, 20],
+          "loyalty": [-15, -8],
+          "population": [-50, 0],
+          "reputation": [6, 12]
+        },
+        "flags_set": ["victory_claimed", "victory_iron"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "merchant_king",
+        "label": "Build an empire of commerce",
+        "narrative_hint": "The merchant king; gold flows like rivers, trade routes span the realm — but swords rust in their scabbards",
+        "impacts": {
+          "gold": [100, 200],
+          "food": [50, 100],
+          "military": [-8, -4],
+          "loyalty": [0, 5],
+          "population": [50, 150],
+          "reputation": [2, 6]
+        },
+        "flags_set": ["victory_claimed", "victory_merchant"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "peoples_champion",
+        "label": "Champion the common folk",
+        "narrative_hint": "The people's champion; the smallfolk rejoice, the nobility grumbles — a new order rises from below",
+        "impacts": {
+          "gold": [-50, -20],
+          "food": [30, 60],
+          "military": [-4, 0],
+          "loyalty": [12, 20],
+          "population": [100, 200],
+          "reputation": [5, 10]
+        },
+        "flags_set": ["victory_claimed", "victory_populist"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "chain_bandits_return",
+    "title": "The Bandits Return",
+    "acts": [1, 2],
+    "weight": 0,
+    "type": "chain",
+    "preconditions": {
+      "min_day": null,
+      "max_day": null,
+      "required_flags": ["bandits_paid_off"],
+      "blocked_by_flags": ["bandits_resolved"],
+      "resource_min": {}
+    },
+    "narrative_hooks": [
+      "The bandits you previously paid off have returned — emboldened and with greater numbers",
+      "Their leader remembers you as an easy mark; the demands are steeper this time",
+      "Claude should make the player feel the consequence of their earlier choice to pay rather than fight",
+      "The bandits are cocky but not invincible — the player has options"
+    ],
+    "options": [
+      {
+        "id": "fight_bandits",
+        "label": "Crush them with military force",
+        "narrative_hint": "Decisive violence; the bandits underestimated you and pay the price — but soldiers die in the hills",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [-30, -15],
+          "military": [-8, -4],
+          "loyalty": [4, 8],
+          "population": [-30, -10],
+          "reputation": [3, 6]
+        },
+        "flags_set": ["bandits_resolved", "bandits_destroyed"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "pay_again",
+        "label": "Pay their increased demands",
+        "narrative_hint": "Throwing gold at the problem again — but this time it costs more and word spreads of your weakness",
+        "impacts": {
+          "gold": [-150, -100],
+          "food": [-40, -20],
+          "military": [0, 0],
+          "loyalty": [-8, -4],
+          "population": [0, 0],
+          "reputation": [-6, -3]
+        },
+        "flags_set": ["bandits_paid_twice"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "set_trap",
+        "label": "Set an ambush at the payment site",
+        "narrative_hint": "Cunning and ruthless; pretend to pay, then spring the trap — risky but could end this permanently",
+        "impacts": {
+          "gold": [-30, -10],
+          "food": [0, 0],
+          "military": [-5, -2],
+          "loyalty": [2, 6],
+          "population": [-15, 0],
+          "reputation": [1, 4]
+        },
+        "flags_set": ["bandits_resolved", "bandits_trapped"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "chain_spy_report",
+    "title": "The Spy's Report",
+    "acts": [2, 3],
+    "weight": 0,
+    "type": "chain",
+    "preconditions": {
+      "min_day": null,
+      "max_day": null,
+      "required_flags": ["spy_deployed"],
+      "blocked_by_flags": ["spy_report_resolved"],
+      "resource_min": {}
+    },
+    "narrative_hooks": [
+      "Your spy returns from the rival's court bearing valuable intelligence",
+      "Claude should reference which rival was being spied on based on game state flags",
+      "The information is explosive — troop movements, secret alliances, or hidden weaknesses",
+      "The player must decide how to use this advantage before the intelligence goes stale"
+    ],
+    "options": [
+      {
+        "id": "act_on_intel",
+        "label": "Act on the intelligence immediately",
+        "narrative_hint": "Strike while the iron is hot; use the information for a preemptive advantage — costs resources to mobilize",
+        "impacts": {
+          "gold": [-60, -30],
+          "food": [-30, -15],
+          "military": [4, 8],
+          "loyalty": [0, 3],
+          "population": [0, 0],
+          "reputation": [2, 5]
+        },
+        "flags_set": ["spy_report_resolved", "intel_acted_on"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "sell_information",
+        "label": "Sell the intelligence to another rival",
+        "narrative_hint": "Mercenary pragmatism; gold for secrets — but if your spy is discovered, trust dies",
+        "impacts": {
+          "gold": [60, 120],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-6, -3],
+          "population": [0, 0],
+          "reputation": [-5, -2]
+        },
+        "flags_set": ["spy_report_resolved", "intel_sold"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "hold_as_leverage",
+        "label": "Keep the intelligence as leverage",
+        "narrative_hint": "Patient scheming; the knowledge is power in itself — reveal it at the perfect moment for maximum effect",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [2, 5],
+          "population": [0, 0],
+          "reputation": [3, 6]
+        },
+        "flags_set": ["spy_report_resolved", "intel_leveraged", "has_blackmail_material"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "chain_alliance_terms",
+    "title": "Alliance Terms Come Due",
+    "acts": [2, 3],
+    "weight": 0,
+    "type": "chain",
+    "preconditions": {
+      "min_day": null,
+      "max_day": null,
+      "required_flags": ["alliance_formed"],
+      "blocked_by_flags": ["alliance_terms_resolved"],
+      "resource_min": {}
+    },
+    "narrative_hooks": [
+      "Your ally calls in the terms of your agreement — they need resources, troops, or political support",
+      "Claude should reference the specific alliance from game state and make the demand feel proportional",
+      "This is the cost of alliances: you gave your word, and now your word is being tested",
+      "The player's response will define whether they are trustworthy or treacherous"
+    ],
+    "options": [
+      {
+        "id": "honor_terms",
+        "label": "Honor the alliance terms in full",
+        "narrative_hint": "Honorable and costly; your word is your bond — allies remember this, and so do potential future allies",
+        "impacts": {
+          "gold": [-80, -50],
+          "food": [-60, -30],
+          "military": [-6, -3],
+          "loyalty": [6, 12],
+          "population": [0, 0],
+          "reputation": [4, 8]
+        },
+        "flags_set": ["alliance_terms_resolved", "alliance_honored"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "renegotiate",
+        "label": "Renegotiate the terms",
+        "narrative_hint": "Diplomatic but risky; pushing back may strain the alliance — or it may find a better balance",
+        "impacts": {
+          "gold": [-40, -20],
+          "food": [-30, -15],
+          "military": [-3, 0],
+          "loyalty": [-3, 0],
+          "population": [0, 0],
+          "reputation": [-4, -1]
+        },
+        "flags_set": ["alliance_terms_resolved", "alliance_renegotiated"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "betray_alliance",
+        "label": "Betray the alliance and keep your resources",
+        "narrative_hint": "Treacherous and self-serving; you keep everything but burn a bridge that may never be rebuilt",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [-12, -6],
+          "population": [0, 0],
+          "reputation": [-10, -5]
+        },
+        "flags_set": ["alliance_terms_resolved", "alliance_betrayed", "oath_breaker"],
+        "flags_clear": ["alliance_formed"],
+        "chain": null
+      }
+    ]
+  },
+  {
+    "id": "chain_advisor_revenge",
+    "title": "The Betrayed Return",
+    "acts": [2, 3],
+    "weight": 0,
+    "type": "chain",
+    "preconditions": {
+      "min_day": null,
+      "max_day": null,
+      "required_flags": ["advisor_dismissed"],
+      "blocked_by_flags": ["advisor_revenge_resolved"],
+      "resource_min": {}
+    },
+    "narrative_hooks": [
+      "An advisor you dismissed or betrayed has returned seeking vengeance",
+      "Claude should reference the specific advisor from game state and their grudge",
+      "They have gathered support — disgruntled soldiers, rival sympathizers, or damaging secrets",
+      "This is a consequence event: the player's past treatment of their court comes back to haunt them"
+    ],
+    "options": [
+      {
+        "id": "face_directly",
+        "label": "Confront them in open court",
+        "narrative_hint": "Direct and risky; a public confrontation that could go either way — strength is respected, but so is a well-aimed accusation",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [-4, -2],
+          "loyalty": [-5, 5],
+          "population": [0, 0],
+          "reputation": [-3, 4]
+        },
+        "flags_set": ["advisor_revenge_resolved", "advisor_confronted"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "buy_silence",
+        "label": "Buy their silence with gold",
+        "narrative_hint": "Pragmatic bribery; the problem disappears but your coffers are lighter and they know you can be squeezed",
+        "impacts": {
+          "gold": [-120, -70],
+          "food": [0, 0],
+          "military": [0, 0],
+          "loyalty": [0, 3],
+          "population": [0, 0],
+          "reputation": [-2, 0]
+        },
+        "flags_set": ["advisor_revenge_resolved", "advisor_bribed"],
+        "flags_clear": [],
+        "chain": null
+      },
+      {
+        "id": "exile_them",
+        "label": "Exile them from the realm",
+        "narrative_hint": "Cold and final; they are removed but carry their grudge to foreign courts where it may poison your reputation",
+        "impacts": {
+          "gold": [0, 0],
+          "food": [0, 0],
+          "military": [-2, 0],
+          "loyalty": [-6, -2],
+          "population": [-20, -5],
+          "reputation": [-5, -2]
+        },
+        "flags_set": ["advisor_revenge_resolved", "advisor_exiled"],
+        "flags_clear": [],
+        "chain": null
+      }
+    ]
+  }
+]

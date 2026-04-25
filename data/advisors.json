@@ -1,0 +1,38 @@
+[
+  {
+    "id": "advisor_military",
+    "name": "Commander Aldus",
+    "specialty": "military",
+    "personality": "cautious",
+    "bias_description": "Favors defensive strategies and military solutions. Distrusts diplomacy and sees most problems as security threats. Occasionally overestimates danger.",
+    "recruitment_act": 1,
+    "is_starting_advisor": true
+  },
+  {
+    "id": "advisor_trade",
+    "name": "Merchant Elara",
+    "specialty": "trade",
+    "personality": "shrewd",
+    "bias_description": "Sees every situation through the lens of profit and loss. Recommends economic solutions and trade deals. Sometimes undervalues loyalty and honor.",
+    "recruitment_act": 1,
+    "is_starting_advisor": false
+  },
+  {
+    "id": "advisor_espionage",
+    "name": "Whisper",
+    "specialty": "espionage",
+    "personality": "paranoid",
+    "bias_description": "Trusts no one and sees conspiracies everywhere. Recommends covert action and surveillance. Sometimes sees threats where none exist.",
+    "recruitment_act": 2,
+    "is_starting_advisor": false
+  },
+  {
+    "id": "advisor_diplomacy",
+    "name": "Sage Corwin",
+    "specialty": "diplomacy",
+    "personality": "idealistic",
+    "bias_description": "Believes in peaceful resolution and the power of words. Recommends alliances and treaties. Sometimes naive about the ruthlessness of rivals.",
+    "recruitment_act": 2,
+    "is_starting_advisor": false
+  }
+]
