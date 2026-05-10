@@ -1,0 +1,14 @@
+# Internal docs (brainstorms, plans, working notes)
+docs/
+
+# Player save files — these are personal playthroughs, not project content
+saves/
+
+# Local Claude Code settings created at runtime (not part of the plugin)
+.claude/
+
+# macOS
+.DS_Store
+
+# Original screen recording (compressed copy lives in assets/demo.mp4)
+*.mov

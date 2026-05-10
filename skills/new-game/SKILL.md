@@ -1,5 +1,5 @@
 ---
-name: realm-of-ruin:new-game
+name: new-game
 description: Start a new Realm of Ruin campaign — a dark medieval kingdom management game
 disable-model-invocation: true
 user-invocable: true
@@ -10,13 +10,15 @@ allowed-tools: Read Write Bash Glob AskUserQuestion
 
 You are about to become the Game Master of **Realm of Ruin**, a TUI kingdom management game running inside Claude Code.
 
+The plugin's data files live under `${CLAUDE_PLUGIN_ROOT}/data/`. Save files go in the player's current working directory under `saves/` (create it if it doesn't exist).
+
 ## Step 1: Load Game Engine
 
-Read the file `data/engine-rules.md` now. It contains ALL the rules you must follow for the entire game session. Internalize them before proceeding.
+Read the file `${CLAUDE_PLUGIN_ROOT}/data/engine-rules.md` now. It contains ALL the rules you must follow for the entire game session. Internalize them before proceeding.
 
 ## Step 2: Load Configuration
 
-Read `data/config.json` for starting resource values, act transition windows, victory thresholds, and balance settings.
+Read `${CLAUDE_PLUGIN_ROOT}/data/config.json` for starting resource values, act transition windows, victory thresholds, and balance settings.
 
 ## Step 3: Initialize New Game
 
@@ -28,18 +30,10 @@ Generate the following using your creativity (dark medieval tone):
 Then use Bash to randomize starting resources:
 
 ```bash
+mkdir -p saves
 python3 -c "
-import random, json
-config = json.load(open('data/config.json'))
-resources = {}
-for r, v in config['starting_resources'].items():
-    base = v['base']
-    var = v['variance']
-    resources[r] = round(base * random.uniform(1 - var, 1 + var))
-print(json.dumps(resources))
-" 2>/dev/null || python -c "
-import random, json
-config = json.load(open('data/config.json'))
+import random, json, os
+config = json.load(open(os.environ['CLAUDE_PLUGIN_ROOT'] + '/data/config.json'))
 resources = {}
 for r, v in config['starting_resources'].items():
     base = v['base']
@@ -49,7 +43,7 @@ print(json.dumps(resources))
 "
 ```
 
-Read `data/advisors.json` and find the advisor with `is_starting_advisor: true` (Commander Aldus, military).
+Read `${CLAUDE_PLUGIN_ROOT}/data/advisors.json` and find the advisor with `is_starting_advisor: true` (Commander Aldus, military).
 
 Create the initial game state:
 
@@ -82,7 +76,7 @@ Create the initial game state:
 }
 ```
 
-Generate a timestamp-based save ID and write the state to `saves/save-<timestamp>.json`.
+Generate a timestamp-based save ID and write the state to `saves/save-<timestamp>.json` (relative to the player's cwd).
 
 ## Step 4: Opening Narrative
 
@@ -90,12 +84,12 @@ Display the TUI panel for Day 1 with an opening scene. Set the tone immediately 
 
 The player arrives at their inherited keep. It is crumbling. The previous lord is dead under suspicious circumstances. The treasury is thin, the granaries are half-empty, and the soldiers look like they haven't been paid in weeks. Commander Aldus meets them at the gate with grim news.
 
-Then immediately draw the first event from Act 1's event pool and present it. The game begins NOW.
+Then immediately draw the first event from Act 1's event pool (`${CLAUDE_PLUGIN_ROOT}/data/events/act1.json`) and present it. The game begins NOW.
 
 ## Step 5: Game Loop
 
 Follow the Turn Structure from the engine rules. Every turn:
-1. Read the save file
+1. Read the save file (`saves/save-<id>.json` in the player's cwd)
 2. Execute the turn (event selection → TUI → player choice → resolution → win/loss check)
 3. Write the updated save file
 4. Continue until victory, defeat, or the player quits

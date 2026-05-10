@@ -1,0 +1,17 @@
+{
+  "name": "realm-of-ruin",
+  "owner": {
+    "name": "Kasyfil Albar",
+    "url": "https://github.com/Kasyfil97"
+  },
+  "plugins": [
+    {
+      "name": "realm-of-ruin",
+      "source": ".",
+      "description": "A dark medieval kingdom management game that runs entirely inside Claude Code",
+      "version": "1.0.0",
+      "homepage": "https://github.com/Kasyfil97/realm-of-ruin",
+      "keywords": ["game", "tui", "rpg", "kingdom-management"]
+    }
+  ]
+}

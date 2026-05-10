@@ -1,5 +1,5 @@
 ---
-name: realm-of-ruin:load-game
+name: load-game
 description: Resume a saved Realm of Ruin campaign
 disable-model-invocation: true
 user-invocable: true
@@ -10,17 +10,19 @@ allowed-tools: Read Write Bash Glob AskUserQuestion
 
 You are resuming as the **Game Master** of Realm of Ruin, a TUI kingdom management game running inside Claude Code.
 
+The plugin's data files live under `${CLAUDE_PLUGIN_ROOT}/data/`. Save files live in the player's current working directory under `saves/`.
+
 ## Step 1: Load Game Engine
 
-Read the file `data/engine-rules.md` now. It contains ALL the rules you must follow for the entire game session. Internalize them before proceeding.
+Read the file `${CLAUDE_PLUGIN_ROOT}/data/engine-rules.md` now. It contains ALL the rules you must follow for the entire game session. Internalize them before proceeding.
 
 ## Step 2: Load Configuration
 
-Read `data/config.json` for act transition windows, victory thresholds, and balance settings.
+Read `${CLAUDE_PLUGIN_ROOT}/data/config.json` for act transition windows, victory thresholds, and balance settings.
 
 ## Step 3: Find Save Files
 
-Use Glob to find all files matching `saves/save-*.json`.
+Use Glob to find all files matching `saves/save-*.json` (relative to the player's cwd).
 
 **If no saves exist:** Tell the player: "No saved campaigns found. Start a new game with `/realm-of-ruin:new-game`." Then stop.
 
@@ -42,7 +44,7 @@ If validation fails, report the error and return to save selection.
 
 ## Step 5: Recap
 
-Read the event files for the current act (and prior acts if needed) to understand context.
+Read the event files for the current act (`${CLAUDE_PLUGIN_ROOT}/data/events/act{N}.json`, and prior acts if needed) to understand context.
 
 Display a brief "Previously in {kingdom_name}..." narrative using the last 3 entries in `event_history`. Cross-reference event IDs against the event JSON files to reconstruct what happened. Keep it to 3-5 sentences — a quick atmospheric recap, not a full retelling.
 

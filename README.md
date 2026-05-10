@@ -4,10 +4,37 @@ A dark medieval kingdom management game that runs entirely inside **Claude Code*
 
 You are a minor lord who inherits a crumbling keep. No tutorial. No hand-holding. Make decisions, face consequences, die or rise to become emperor. Every playthrough is different.
 
-## Requirements
+https://github.com/Kasyfil97/realm-of-ruin/raw/main/assets/demo.mp4
+
+> **Demo:** [Watch on GitHub](assets/demo.mp4) — if the video above doesn't play inline, click the link.
+
+## Install
+
+Realm of Ruin is a Claude Code plugin. Install it from inside Claude Code:
+
+```
+/plugin marketplace add Kasyfil97/realm-of-ruin
+/plugin install realm-of-ruin@realm-of-ruin
+```
+
+That's it. Both `/realm-of-ruin:new-game` and `/realm-of-ruin:load-game` will be available.
+
+### Requirements
 
 - [Claude Code](https://claude.com/claude-code) with an active subscription
 - Python 3 (used for dice rolls and randomization)
+
+### Updating
+
+```
+/plugin marketplace update realm-of-ruin
+```
+
+### Uninstalling
+
+```
+/plugin uninstall realm-of-ruin@realm-of-ruin
+```
 
 ## How to Start
 
@@ -123,11 +150,11 @@ Each can be defeated, allied with, or dealt with through other means. Your choic
 
 ## Saving
 
-The game saves automatically after every turn. Your save files are stored in the `saves/` directory as JSON.
+The game saves automatically after every turn. Save files are stored in the `saves/` directory of your current working directory as JSON.
 
 ## Modding
 
-All game content lives in JSON files under `data/`:
+All game content lives in JSON files under `data/` inside the plugin directory:
 
 - `config.json` — Resource balance, victory thresholds, act timing
 - `events/act1.json`, `act2.json`, `act3.json` — Event pools per act
@@ -135,4 +162,22 @@ All game content lives in JSON files under `data/`:
 - `advisors.json` — Advisor personalities and biases
 - `rivals.json` — Rival lord stats and resolution paths
 
-Edit these to create your own events, rebalance resources, or add new content.
+Clone this repo and edit these to create your own events, rebalance resources, or add new content. After editing, re-link the local copy via `/plugin marketplace add /path/to/realm-of-ruin`.
+
+## Plugin Layout
+
+```
+realm-of-ruin/
+├── .claude-plugin/
+│   ├── plugin.json          # Plugin manifest
+│   └── marketplace.json     # Marketplace entry
+├── skills/
+│   ├── new-game/SKILL.md    # /realm-of-ruin:new-game
+│   └── load-game/SKILL.md   # /realm-of-ruin:load-game
+├── data/                    # Game content (rules, events, advisors, rivals)
+└── assets/demo.mp4          # Promo video
+```
+
+## License
+
+MIT
