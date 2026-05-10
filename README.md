@@ -4,9 +4,9 @@ A dark medieval kingdom management game that runs entirely inside **Claude Code*
 
 You are a minor lord who inherits a crumbling keep. No tutorial. No hand-holding. Make decisions, face consequences, die or rise to become emperor. Every playthrough is different.
 
-https://github.com/Kasyfil97/realm-of-ruin/raw/main/assets/demo.mp4
+![Realm of Ruin gameplay demo](assets/demo.gif)
 
-> **Demo:** [Watch on GitHub](assets/demo.mp4) — if the video above doesn't play inline, click the link.
+> Prefer video? [Watch the full screen recording (MP4)](assets/demo.mp4).
 
 ## Install
 
