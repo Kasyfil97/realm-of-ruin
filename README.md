@@ -22,7 +22,8 @@ That's it. Both `/realm-of-ruin:new-game` and `/realm-of-ruin:load-game` will be
 ### Requirements
 
 - [Claude Code](https://claude.com/claude-code) with an active subscription
-- Python 3 (used for dice rolls and randomization)
+- Python 3 on `PATH` as `python3` or `python` (used for dice rolls and randomization)
+- **Windows users:** Claude Code runs the plugin's shell snippets through Git Bash, so install [Git for Windows](https://git-scm.com/download/win) if you don't already have it. macOS and Linux work out of the box.
 
 ### Updating
 

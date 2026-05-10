@@ -27,13 +27,25 @@ Generate the following using your creativity (dark medieval tone):
 - **Lord name** — the player's name
 - **Lord title** — a slightly mocking epithet reflecting their inexperience (e.g., "the Uncertain," "the Unproven," "the Reluctant")
 
-Then use Bash to randomize starting resources:
+Then use Bash to randomize starting resources. The `python3 ... || python` fallback is intentional — Windows installs typically only expose `python`, while macOS/Linux usually expose `python3`. Use `os.path.join` and `os.makedirs` so the same script works on every OS.
 
 ```bash
-mkdir -p saves
 python3 -c "
 import random, json, os
-config = json.load(open(os.environ['CLAUDE_PLUGIN_ROOT'] + '/data/config.json'))
+os.makedirs('saves', exist_ok=True)
+config_path = os.path.join(os.environ['CLAUDE_PLUGIN_ROOT'], 'data', 'config.json')
+config = json.load(open(config_path))
+resources = {}
+for r, v in config['starting_resources'].items():
+    base = v['base']
+    var = v['variance']
+    resources[r] = round(base * random.uniform(1 - var, 1 + var))
+print(json.dumps(resources))
+" 2>/dev/null || python -c "
+import random, json, os
+os.makedirs('saves', exist_ok=True)
+config_path = os.path.join(os.environ['CLAUDE_PLUGIN_ROOT'], 'data', 'config.json')
+config = json.load(open(config_path))
 resources = {}
 for r, v in config['starting_resources'].items():
     base = v['base']
